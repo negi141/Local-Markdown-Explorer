@@ -17,7 +17,7 @@ namespace LocalMarkdownExplorer
     {
         string targetPath;
         Encoding fileEncode;
-        string[] textExtension = { ".txt", ".md", ".sql" };
+        string[] textExtension = { ".txt", ".md" };
         bool isFirstLoad = true;
 
         public Form1()
@@ -35,7 +35,7 @@ namespace LocalMarkdownExplorer
             Util.IniFile inifile = new Util.IniFile("config.ini");
             if (inifile.Data("TargetPath") == "")
             {
-                inifile.data["TargetPath"] = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                inifile.data["TargetPath"] = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 inifile.data["FileEncode"] = "Shift_JIS";
                 inifile.Save();
 
@@ -49,7 +49,7 @@ namespace LocalMarkdownExplorer
                 fileEncode = Encoding.GetEncoding(inifile.Data("FileEncode"));
 
                 string[] path = targetPath.Split('\\');
-                this.Text = "Local MarkDown Searcher [" + path[path.Length - 2] + "]";
+                this.Text = "LocalMarkdownExplorer  [" + path[path.Length - 2] + "]";
 
 
                 this.lbCautionMessge.Text = "内容を変更中";
@@ -77,7 +77,7 @@ namespace LocalMarkdownExplorer
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string tempTitle = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            string tempTitle = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".md";
             Util.IO.SaveFile(targetPath + tempTitle, "", fileEncode);
 
             this.InitViewListBox();
