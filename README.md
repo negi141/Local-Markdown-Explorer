@@ -5,6 +5,7 @@ LocalMarkdownExplorerは、Windows上で動作するMarkdownファイル用の�
 指定したローカルのディレクトリに置いたMarkdown形式のファイルやテキストファイルを全文検索でき、HTMLでの表示するソフトです。
 
 ## 画面
+![画面1](http://daybreak3d.nobody.jp/image/tmp/ss01.png)
 
 ## ソースコード
 Visual Studio 2010 (C#)
