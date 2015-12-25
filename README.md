@@ -1,0 +1,2 @@
+# LocalMarkdownExplorer
+指定したローカルディレクトリに置いているテキストファイル（主にMarkdown形式）を全文検索・閲覧するソフト。
