@@ -98,17 +98,41 @@ namespace LocalMarkdownExplorer
             else
             {
                 DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
+                string oldFileName = dictionaryEntry.Key.ToString();
+                string newFileName = this.tbTitle.Text;
+                bool cancel = false;
+                // ファイル名を変更する場合
+                if (oldFileName != newFileName)
+                {
+                    // 同名ファイルが存在した場合
+                    if (File.Exists(targetPath + newFileName))
+                    {
+                        DialogResult result = MessageBox.Show("既に" + newFileName + "が存在します。上書きしてよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                        if (result == DialogResult.OK)
+                        {
+                            File.Delete(targetPath + oldFileName);
+                        }
+                        else
+                        {
+                            cancel = true;
+                        }
+                    }
+                    else
+                    {
+                        Util.IO.DeleteFile(targetPath + oldFileName);
+                    }
+                }
 
-                Util.IO.DeleteFile(dictionaryEntry.Value.ToString());
+                if (!cancel)
+                {
+                    Util.IO.SaveFile(targetPath + newFileName, this.tbMd.Text, fileEncode);
 
-                string saveFileName = this.tbTitle.Text;
-                Util.IO.SaveFile(targetPath + saveFileName, this.tbMd.Text, fileEncode);
+                    this.InitViewListBox();
 
-                this.InitViewListBox();
+                    this.lbMdList.Text = newFileName;
 
-                this.lbMdList.Text = saveFileName;
-
-                openSelectFile();
+                    openSelectFile();
+                }
             }
         }
 

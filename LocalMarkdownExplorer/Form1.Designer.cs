@@ -83,20 +83,20 @@
             // 
             // lbMdList
             // 
-            this.lbMdList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lbMdList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbMdList.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbMdList.FormattingEnabled = true;
             this.lbMdList.Location = new System.Drawing.Point(12, 85);
             this.lbMdList.Name = "lbMdList";
-            this.lbMdList.Size = new System.Drawing.Size(302, 641);
+            this.lbMdList.Size = new System.Drawing.Size(302, 524);
             this.lbMdList.TabIndex = 28;
             this.lbMdList.SelectedIndexChanged += new System.EventHandler(this.lbMdList_SelectedIndexChanged);
             // 
             // tabEditor
             // 
-            this.tabEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tabEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabEditor.Controls.Add(this.tabText);
             this.tabEditor.Controls.Add(this.tabMd);
@@ -104,7 +104,7 @@
             this.tabEditor.Location = new System.Drawing.Point(322, 85);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.SelectedIndex = 0;
-            this.tabEditor.Size = new System.Drawing.Size(656, 639);
+            this.tabEditor.Size = new System.Drawing.Size(590, 534);
             this.tabEditor.TabIndex = 48;
             this.tabEditor.SelectedIndexChanged += new System.EventHandler(this.tabEditor_SelectedIndexChanged);
             // 
@@ -114,22 +114,22 @@
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(648, 613);
+            this.tabText.Size = new System.Drawing.Size(582, 508);
             this.tabText.TabIndex = 0;
-            this.tabText.Text = "　　Text　　";
+            this.tabText.Text = "　　Text Editor　　";
             this.tabText.UseVisualStyleBackColor = true;
             // 
             // tbMd
             // 
-            this.tbMd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tbMd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMd.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbMd.Location = new System.Drawing.Point(6, 11);
             this.tbMd.Multiline = true;
             this.tbMd.Name = "tbMd";
             this.tbMd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMd.Size = new System.Drawing.Size(636, 596);
+            this.tbMd.Size = new System.Drawing.Size(757, 756);
             this.tbMd.TabIndex = 30;
             this.tbMd.TextChanged += new System.EventHandler(this.tbMd_TextChanged);
             // 
@@ -139,9 +139,9 @@
             this.tabMd.Location = new System.Drawing.Point(4, 22);
             this.tabMd.Name = "tabMd";
             this.tabMd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMd.Size = new System.Drawing.Size(648, 613);
+            this.tabMd.Size = new System.Drawing.Size(582, 508);
             this.tabMd.TabIndex = 1;
-            this.tabMd.Text = " MarkDown ";
+            this.tabMd.Text = " MarkdownViewer ";
             this.tabMd.UseVisualStyleBackColor = true;
             // 
             // webMd
@@ -150,7 +150,7 @@
             this.webMd.Location = new System.Drawing.Point(3, 3);
             this.webMd.MinimumSize = new System.Drawing.Size(20, 20);
             this.webMd.Name = "webMd";
-            this.webMd.Size = new System.Drawing.Size(642, 607);
+            this.webMd.Size = new System.Drawing.Size(576, 502);
             this.webMd.TabIndex = 0;
             // 
             // tabHTML
@@ -159,15 +159,15 @@
             this.tabHTML.Location = new System.Drawing.Point(4, 22);
             this.tabHTML.Name = "tabHTML";
             this.tabHTML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHTML.Size = new System.Drawing.Size(648, 613);
+            this.tabHTML.Size = new System.Drawing.Size(582, 508);
             this.tabHTML.TabIndex = 2;
-            this.tabHTML.Text = "　　HTML　　";
+            this.tabHTML.Text = "　　HTML Output　　";
             this.tabHTML.UseVisualStyleBackColor = true;
             // 
             // tbHTML
             // 
-            this.tbHTML.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tbHTML.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbHTML.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbHTML.Location = new System.Drawing.Point(6, 6);
@@ -175,7 +175,7 @@
             this.tbHTML.Name = "tbHTML";
             this.tbHTML.ReadOnly = true;
             this.tbHTML.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbHTML.Size = new System.Drawing.Size(629, 587);
+            this.tbHTML.Size = new System.Drawing.Size(563, 482);
             this.tbHTML.TabIndex = 32;
             // 
             // label2
@@ -261,7 +261,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 736);
+            this.ClientSize = new System.Drawing.Size(924, 631);
             this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.lbCautionMessge);
             this.Controls.Add(this.btnOpenDir);
