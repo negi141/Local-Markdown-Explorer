@@ -83,7 +83,7 @@
             this.btnDirBrowse.Name = "btnDirBrowse";
             this.btnDirBrowse.Size = new System.Drawing.Size(47, 23);
             this.btnDirBrowse.TabIndex = 5;
-            this.btnDirBrowse.Text = "参照";
+            this.btnDirBrowse.Text = "参照...";
             this.btnDirBrowse.UseVisualStyleBackColor = true;
             this.btnDirBrowse.Click += new System.EventHandler(this.btnDirBrowse_Click);
             // 
