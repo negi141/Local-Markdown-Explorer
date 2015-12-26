@@ -7,6 +7,9 @@ LocalMarkdownExplorerは、Windows上で動作するMarkdownファイル用の�
 ## 画面
 ![](http://daybreak3d.nobody.jp/image/tmp/ss03.png)
 
+## 利用
+[LocalMarkdownExplorer.zip](https://github.com/negi141/LocalMarkdownExplorer/raw/master/bin/LocalMarkdownExplorer.zip)
+
 ## ソースコード
 Visual Studio 2010 (C#)
 
