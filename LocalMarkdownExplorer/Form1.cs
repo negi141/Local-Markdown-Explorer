@@ -223,26 +223,24 @@ namespace LocalMarkdownExplorer
             {
                 string fullpath = array[i];
                 string extension = Path.GetExtension(fullpath);
-                if (extension != ".exe")
-                {
-                    string key = fullpath.Replace(sDir, "");
-                    string value = fullpath;
+                string key = fullpath.Replace(sDir, "");
+                string value = fullpath;
 
-                    if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
+                if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
+                {
+                    this.lbMdList.Items.Add(new DictionaryEntry(key, value));
+                }
+                else
+                {
+                    if (enableDetailSearch)
                     {
-                        this.lbMdList.Items.Add(new DictionaryEntry(key, value));
-                    }
-                    else
-                    {
-                        if (enableDetailSearch)
+                        long fileSize = new FileInfo(fullpath).Length;
+                        // テキストファイルであれば内容を検索, 1MB以下のファイルのみ
+                        if (Array.IndexOf(textExtension, extension) != -1 && fileSize <= 1000000)
                         {
-                            // テキストファイルであれば内容を検索
-                            if (Array.IndexOf(textExtension, extension) != -1)
+                            if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
                             {
-                                if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
-                                {
-                                    this.lbMdList.Items.Add(new DictionaryEntry(key, value));
-                                }
+                                this.lbMdList.Items.Add(new DictionaryEntry(key, value));
                             }
                         }
                     }
