@@ -126,11 +126,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMd.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbMd.Location = new System.Drawing.Point(6, 11);
+            this.tbMd.Location = new System.Drawing.Point(6, 6);
             this.tbMd.Multiline = true;
             this.tbMd.Name = "tbMd";
             this.tbMd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMd.Size = new System.Drawing.Size(757, 756);
+            this.tbMd.Size = new System.Drawing.Size(570, 496);
             this.tbMd.TabIndex = 30;
             this.tbMd.TextChanged += new System.EventHandler(this.tbMd_TextChanged);
             // 
