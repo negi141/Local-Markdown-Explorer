@@ -162,7 +162,7 @@
             this.tabHTML.Location = new System.Drawing.Point(4, 22);
             this.tabHTML.Name = "tabHTML";
             this.tabHTML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHTML.Size = new System.Drawing.Size(582, 508);
+            this.tabHTML.Size = new System.Drawing.Size(569, 491);
             this.tabHTML.TabIndex = 2;
             this.tabHTML.Text = "　　HTML Output　　";
             this.tabHTML.UseVisualStyleBackColor = true;
