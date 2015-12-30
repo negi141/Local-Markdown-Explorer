@@ -62,7 +62,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 104);
+            this.label1.Location = new System.Drawing.Point(29, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 12);
             this.label1.TabIndex = 2;
@@ -91,7 +91,6 @@
             // 
             this.tbTargetPath.Location = new System.Drawing.Point(56, 52);
             this.tbTargetPath.Name = "tbTargetPath";
-            this.tbTargetPath.ReadOnly = true;
             this.tbTargetPath.Size = new System.Drawing.Size(257, 19);
             this.tbTargetPath.TabIndex = 6;
             // 

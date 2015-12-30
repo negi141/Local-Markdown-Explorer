@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LocalMarkdownExplorer
 {
@@ -28,12 +29,31 @@ namespace LocalMarkdownExplorer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string err = saveValidate(tbTargetPath.Text);
+            if(err != "") {
+                MessageBox.Show(err);
+                return;
+            }
             Util.IniFile inifile = new Util.IniFile("config.ini");
             inifile.data["TargetPath"] = tbTargetPath.Text;
             inifile.data["FileEncode"] = ddlEncoding.SelectedItem.ToString();
             inifile.Save();
             form1.initLoad();
             this.Close();
+        }
+
+        private string saveValidate(string targetPath)
+        {
+            string errMessage = "";
+            if (targetPath == "")
+            {
+                errMessage = "フォルダパスを入力してください。";
+            }
+            else
+            {
+                if (!Directory.Exists(targetPath)) errMessage = "フォルダパスを正しく入力してください。";
+            }
+            return errMessage;
         }
 
         private void btnDirBrowse_Click(object sender, EventArgs e)
