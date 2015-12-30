@@ -154,6 +154,7 @@
             this.Controls.Add(this.groupBoxEncode);
             this.Controls.Add(this.groupBoxPath);
             this.Controls.Add(this.btnSave);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormSetting";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "設定";
