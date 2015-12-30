@@ -48,10 +48,12 @@
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.lbCautionMessge = new System.Windows.Forms.Label();
             this.btnSetting = new System.Windows.Forms.Button();
+            this.groupBoxFile = new System.Windows.Forms.GroupBox();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
             this.tabHTML.SuspendLayout();
+            this.groupBoxFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -78,7 +80,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(126, 28);
             this.btnAdd.TabIndex = 30;
-            this.btnAdd.Text = "作成";
+            this.btnAdd.Text = "新規作成";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -90,7 +92,7 @@
             this.lbMdList.FormattingEnabled = true;
             this.lbMdList.Location = new System.Drawing.Point(12, 85);
             this.lbMdList.Name = "lbMdList";
-            this.lbMdList.Size = new System.Drawing.Size(302, 524);
+            this.lbMdList.Size = new System.Drawing.Size(302, 537);
             this.lbMdList.TabIndex = 28;
             this.lbMdList.SelectedIndexChanged += new System.EventHandler(this.lbMdList_SelectedIndexChanged);
             // 
@@ -102,10 +104,10 @@
             this.tabEditor.Controls.Add(this.tabText);
             this.tabEditor.Controls.Add(this.tabMd);
             this.tabEditor.Controls.Add(this.tabHTML);
-            this.tabEditor.Location = new System.Drawing.Point(322, 85);
+            this.tabEditor.Location = new System.Drawing.Point(7, 90);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.SelectedIndex = 0;
-            this.tabEditor.Size = new System.Drawing.Size(590, 534);
+            this.tabEditor.Size = new System.Drawing.Size(577, 517);
             this.tabEditor.TabIndex = 48;
             this.tabEditor.SelectedIndexChanged += new System.EventHandler(this.tabEditor_SelectedIndexChanged);
             // 
@@ -115,7 +117,7 @@
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(582, 508);
+            this.tabText.Size = new System.Drawing.Size(569, 491);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "　　Text Editor　　";
             this.tabText.UseVisualStyleBackColor = true;
@@ -130,7 +132,7 @@
             this.tbMd.Multiline = true;
             this.tbMd.Name = "tbMd";
             this.tbMd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMd.Size = new System.Drawing.Size(570, 496);
+            this.tbMd.Size = new System.Drawing.Size(557, 479);
             this.tbMd.TabIndex = 30;
             this.tbMd.TextChanged += new System.EventHandler(this.tbMd_TextChanged);
             // 
@@ -140,7 +142,7 @@
             this.tabMd.Location = new System.Drawing.Point(4, 22);
             this.tabMd.Name = "tabMd";
             this.tabMd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMd.Size = new System.Drawing.Size(582, 508);
+            this.tabMd.Size = new System.Drawing.Size(569, 491);
             this.tabMd.TabIndex = 1;
             this.tabMd.Text = " MarkdownViewer ";
             this.tabMd.UseVisualStyleBackColor = true;
@@ -151,7 +153,7 @@
             this.webMd.Location = new System.Drawing.Point(3, 3);
             this.webMd.MinimumSize = new System.Drawing.Size(20, 20);
             this.webMd.Name = "webMd";
-            this.webMd.Size = new System.Drawing.Size(576, 502);
+            this.webMd.Size = new System.Drawing.Size(563, 485);
             this.webMd.TabIndex = 0;
             // 
             // tabHTML
@@ -182,7 +184,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(320, 58);
+            this.label2.Location = new System.Drawing.Point(4, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 12);
             this.label2.TabIndex = 47;
@@ -191,7 +193,7 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnDelete.Location = new System.Drawing.Point(788, 12);
+            this.btnDelete.Location = new System.Drawing.Point(472, 18);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(105, 29);
             this.btnDelete.TabIndex = 46;
@@ -202,7 +204,7 @@
             // tbTitle
             // 
             this.tbTitle.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbTitle.Location = new System.Drawing.Point(377, 51);
+            this.tbTitle.Location = new System.Drawing.Point(61, 57);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(382, 23);
             this.tbTitle.TabIndex = 45;
@@ -210,9 +212,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(322, 12);
+            this.btnSave.Location = new System.Drawing.Point(17, 18);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(233, 29);
+            this.btnSave.Size = new System.Drawing.Size(147, 29);
             this.btnSave.TabIndex = 44;
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -220,7 +222,7 @@
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(616, 13);
+            this.btnOpenFile.Location = new System.Drawing.Point(300, 19);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(93, 28);
             this.btnOpenFile.TabIndex = 49;
@@ -242,7 +244,7 @@
             // 
             this.lbCautionMessge.AutoSize = true;
             this.lbCautionMessge.ForeColor = System.Drawing.Color.Tomato;
-            this.lbCautionMessge.Location = new System.Drawing.Point(772, 58);
+            this.lbCautionMessge.Location = new System.Drawing.Point(456, 64);
             this.lbCautionMessge.Name = "lbCautionMessge";
             this.lbCautionMessge.Size = new System.Drawing.Size(92, 12);
             this.lbCautionMessge.TabIndex = 51;
@@ -258,20 +260,34 @@
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
+            // groupBoxFile
+            // 
+            this.groupBoxFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxFile.Controls.Add(this.btnSave);
+            this.groupBoxFile.Controls.Add(this.tbTitle);
+            this.groupBoxFile.Controls.Add(this.lbCautionMessge);
+            this.groupBoxFile.Controls.Add(this.btnDelete);
+            this.groupBoxFile.Controls.Add(this.label2);
+            this.groupBoxFile.Controls.Add(this.btnOpenFile);
+            this.groupBoxFile.Controls.Add(this.tabEditor);
+            this.groupBoxFile.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBoxFile.Location = new System.Drawing.Point(320, 13);
+            this.groupBoxFile.Name = "groupBoxFile";
+            this.groupBoxFile.Size = new System.Drawing.Size(592, 608);
+            this.groupBoxFile.TabIndex = 53;
+            this.groupBoxFile.TabStop = false;
+            this.groupBoxFile.Text = "ファイル";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 631);
+            this.Controls.Add(this.groupBoxFile);
             this.Controls.Add(this.btnSetting);
-            this.Controls.Add(this.lbCautionMessge);
             this.Controls.Add(this.btnOpenDir);
-            this.Controls.Add(this.btnOpenFile);
-            this.Controls.Add(this.tabEditor);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.tbTitle);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.btnAdd);
@@ -286,6 +302,8 @@
             this.tabMd.ResumeLayout(false);
             this.tabHTML.ResumeLayout(false);
             this.tabHTML.PerformLayout();
+            this.groupBoxFile.ResumeLayout(false);
+            this.groupBoxFile.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,6 +330,7 @@
         private System.Windows.Forms.TabPage tabHTML;
         private System.Windows.Forms.TextBox tbHTML;
         private System.Windows.Forms.Button btnSetting;
+        private System.Windows.Forms.GroupBox groupBoxFile;
     }
 }
 

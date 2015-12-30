@@ -20,6 +20,8 @@ namespace LocalMarkdownExplorer
         string[] textExtension = { ".txt", ".md" };
         bool isFirstLoad = true;
 
+        SelectedFile selectedFile = new SelectedFile();
+
         public Form1()
         {
             InitializeComponent();
@@ -51,7 +53,6 @@ namespace LocalMarkdownExplorer
                 string[] path = targetPath.Split('\\');
                 this.Text = "LocalMarkdownExplorer  [" + path[path.Length - 2] + "]";
 
-
                 this.lbCautionMessge.Text = "内容を変更中";
                 this.lbCautionMessge.Visible = false;
 
@@ -59,7 +60,7 @@ namespace LocalMarkdownExplorer
 
                 this.tabEditor.SelectedIndex = 1;
 
-                this.ActiveControl = this.tbSearch;
+                this.groupBoxFile.Enabled = false;
 
                 this.isFirstLoad = false;
             }
@@ -97,8 +98,8 @@ namespace LocalMarkdownExplorer
             }
             else
             {
-                DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
-                string oldFileName = dictionaryEntry.Key.ToString();
+                selectedFile = getSelectedItem();
+                string oldFileName = selectedFile.fileName;
                 string newFileName = this.tbTitle.Text;
                 bool cancel = false;
                 // ファイル名を変更する場合
@@ -138,12 +139,12 @@ namespace LocalMarkdownExplorer
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
+            selectedFile = getSelectedItem();
 
-            DialogResult result = MessageBox.Show(dictionaryEntry.Key + "を削除してよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            DialogResult result = MessageBox.Show(selectedFile.fileName + "を削除してよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (result == DialogResult.OK)
             {
-                File.Delete(dictionaryEntry.Value.ToString());
+                File.Delete(selectedFile.fullPath);
 
                 this.InitViewListBox();
             }
@@ -151,9 +152,9 @@ namespace LocalMarkdownExplorer
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
-            DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
+            selectedFile = getSelectedItem();
 
-            Util.IO.ProcessStart(dictionaryEntry.Value.ToString());
+            Util.IO.ProcessStart(selectedFile.fullPath);
         }
 
         private void btnOpenDir_Click(object sender, EventArgs e)
@@ -167,11 +168,13 @@ namespace LocalMarkdownExplorer
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
+            this.groupBoxFile.Enabled = false;
             this.SetViewListBox(this.tbSearch.Text.ToLower(), true);
         }
 
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.groupBoxFile.Enabled = true;
             openSelectFile();
 
             this.displayMarkDown();
@@ -208,11 +211,6 @@ namespace LocalMarkdownExplorer
             this.lbMdList.DisplayMember = "Key";
             this.lbMdList.ValueMember = "Value";
             this.DirSearch(targetPath, searchWord, enableDetailSearch);
-
-            if (this.lbMdList.Items.Count != 0)
-            {
-                this.lbMdList.SelectedIndex = 0;
-            }
         }
 
         private void DirSearch(string sDir, string searchWord, bool enableDetailSearch)
@@ -250,24 +248,31 @@ namespace LocalMarkdownExplorer
 
         private void openSelectFile()
         {
-            DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
+            selectedFile = getSelectedItem();
 
-            string filename = dictionaryEntry.Key.ToString();
-            string extension = Path.GetExtension(dictionaryEntry.Value.ToString());
-
-            this.tbTitle.Text = filename;
+            this.tbTitle.Text = selectedFile.fileName;
             // テキストファイル
-            if (Array.IndexOf(textExtension, extension) != -1)
+            if (Array.IndexOf(textExtension, selectedFile.extension) != -1)
             {
                 tabEditor.Visible = true;
 
-                this.tbMd.Text = Util.IO.GetFileReadToEnd(dictionaryEntry.Value.ToString(), fileEncode);
+                this.tbMd.Text = Util.IO.GetFileReadToEnd(selectedFile.fullPath, fileEncode);
             }
             else
             { // それ以外は実行する
                 tabEditor.Visible = false;
             }
             lbCautionMessge.Visible = false;
+        }
+
+        private SelectedFile getSelectedItem()
+        {
+            SelectedFile file = new SelectedFile();
+            DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
+            file.fileName = dictionaryEntry.Key.ToString();
+            file.fullPath = dictionaryEntry.Value.ToString();
+            file.extension = Path.GetExtension(file.fullPath);
+            return file;
         }
 
         private void displayMarkDown()
