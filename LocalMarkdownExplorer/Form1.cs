@@ -35,9 +35,11 @@ namespace LocalMarkdownExplorer
         public void initLoad()
         {
             Util.IniFile inifile = new Util.IniFile("config.ini");
-            if (inifile.Data("TargetPath") == "")
+            if (inifile.Data("PathType") == "")
             {
-                inifile.data["TargetPath"] = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                inifile.data["PathType"] = "Absolute";
+                inifile.data["AbsolutePath"] = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                inifile.data["RelativePath"] = "";
                 inifile.data["FileEncode"] = "Shift_JIS";
                 inifile.Save();
 
@@ -47,11 +49,17 @@ namespace LocalMarkdownExplorer
             }
             else
             {
-                targetPath = inifile.Data("TargetPath") + "\\";
+                if (inifile.Data("PathType") == "Absolute")
+                {
+                    targetPath = inifile.Data("AbsolutePath") + "\\";
+                }
+                else if (inifile.Data("PathType") == "Relative")
+                {
+                    targetPath = Path.GetFullPath(inifile.Data("RelativePath"));
+                }
                 fileEncode = Encoding.GetEncoding(inifile.Data("FileEncode"));
 
-                string[] path = targetPath.Split('\\');
-                this.Text = "LocalMarkdownExplorer  [" + path[path.Length - 2] + "]";
+                this.Text = "LocalMarkdownExplorer  [" + Util.Path.GetLastDir(targetPath) + "]";
 
                 this.lbCautionMessge.Text = "内容を変更中";
                 this.lbCautionMessge.Visible = false;

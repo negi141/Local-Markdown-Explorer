@@ -7,8 +7,8 @@ namespace LocalMarkdownExplorer
 {
     class SelectedFile
     {
-        public string fileName;
-        public string fullPath;
-        public string extension;
+        public string fileName { get; set; }
+        public string fullPath { get; set; }
+        public string extension { get; set; }
     }
 }

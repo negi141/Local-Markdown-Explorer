@@ -23,19 +23,23 @@ namespace LocalMarkdownExplorer
         {
             Util.IniFile inifile = new Util.IniFile("config.ini");
 
-            tbTargetPath.Text = inifile.Data("TargetPath");
+            if (inifile.Data("PathType") == "Absolute") rbPathAbsolute.Select(); else rbPathRelative.Select();
+            tbPathAbsolute.Text = inifile.Data("AbsolutePath");
+            tbPathRelative.Text = inifile.Data("RelativePath");
             ddlEncoding.Text = inifile.Data("FileEncode");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string err = saveValidate(tbTargetPath.Text);
+            string err = saveValidate(tbPathAbsolute.Text);
             if(err != "") {
                 MessageBox.Show(err);
                 return;
             }
             Util.IniFile inifile = new Util.IniFile("config.ini");
-            inifile.data["TargetPath"] = tbTargetPath.Text;
+            inifile.data["PathType"] = (rbPathAbsolute.Checked) ? "Absolute" : "Relative";
+            inifile.data["AbsolutePath"] = tbPathAbsolute.Text;
+            inifile.data["RelativePath"] = tbPathRelative.Text;
             inifile.data["FileEncode"] = ddlEncoding.SelectedItem.ToString();
             inifile.Save();
             form1.initLoad();
@@ -58,14 +62,19 @@ namespace LocalMarkdownExplorer
 
         private void btnDirBrowse_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = tbTargetPath.Text;
+            folderBrowserDialog1.SelectedPath = tbPathAbsolute.Text;
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                tbTargetPath.Text = folderBrowserDialog1.SelectedPath;
+                tbPathAbsolute.Text = folderBrowserDialog1.SelectedPath;
             }
 
             folderBrowserDialog1.Dispose();
+        }
+
+        private void btnRelativeParentPath_Click(object sender, EventArgs e)
+        {
+            tbPathRelative.Text = "..\\";
         }
     }
 }

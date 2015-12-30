@@ -9,12 +9,6 @@ namespace LocalMarkdownExplorer
     {
         public class IO
         {
-            // アプリケーションのパスを返す
-            public static string GetLocalPath()
-            {
-                return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
-            }
-
             // ﾌｧｲﾙ読み込み
             public static string GetFileReadToEnd(string getFileName, Encoding enc)
             {
@@ -98,7 +92,7 @@ namespace LocalMarkdownExplorer
 
             public IniFile(string filename)
             {
-                this.filename_fullpath = Util.IO.GetLocalPath() + filename;
+                this.filename_fullpath = Util.Path.GetLocalPath() + filename;
                 this.enc = Encoding.GetEncoding("UTF-8");
                 if (!File.Exists(filename_fullpath))
                 {
@@ -144,6 +138,23 @@ namespace LocalMarkdownExplorer
                     sw.WriteLine("[" + d.Key + "]" + d.Value);
                 }
                 sw.Close();
+            }
+
+        }
+
+        public class Path
+        {
+            // アプリケーションのパスを返す
+            public static string GetLocalPath()
+            {
+                return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
+            }
+            // 末尾のディレクトリ名を返す
+            public static string GetLastDir(string path)
+            {
+                string[] pathArr = path.Split('\\');
+                string lastDir = pathArr[pathArr.Length - 2];
+                return lastDir;
             }
 
         }
