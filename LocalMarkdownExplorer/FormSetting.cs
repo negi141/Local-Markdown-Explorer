@@ -27,11 +27,13 @@ namespace LocalMarkdownExplorer
             tbPathAbsolute.Text = inifile.Data("AbsolutePath");
             tbPathRelative.Text = inifile.Data("RelativePath");
             ddlEncoding.Text = inifile.Data("FileEncode");
+            tbExtensionText.Text = inifile.Data("ExtensionText");
+            tbExtensionIgnore.Text = inifile.Data("ExtensionIgnore");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string err = saveValidate(tbPathAbsolute.Text);
+            string err = saveValidate();
             if(err != "") {
                 MessageBox.Show(err);
                 return;
@@ -41,21 +43,29 @@ namespace LocalMarkdownExplorer
             inifile.data["AbsolutePath"] = tbPathAbsolute.Text;
             inifile.data["RelativePath"] = tbPathRelative.Text;
             inifile.data["FileEncode"] = ddlEncoding.SelectedItem.ToString();
+            inifile.data["ExtensionText"] = tbExtensionText.Text;
+            inifile.data["ExtensionIgnore"] = tbExtensionIgnore.Text;
             inifile.Save();
             form1.initLoad();
             this.Close();
         }
 
-        private string saveValidate(string targetPath)
+        private string saveValidate()
         {
             string errMessage = "";
-            if (targetPath == "")
+            if (rbPathAbsolute.Checked)
             {
-                errMessage = "フォルダパスを入力してください。";
+                if (tbPathAbsolute.Text == "" || !Directory.Exists(tbPathAbsolute.Text))
+                {
+                    errMessage = "絶対パスを正しく入力してください。";
+                }
             }
             else
             {
-                if (!Directory.Exists(targetPath)) errMessage = "フォルダパスを正しく入力してください。";
+                if (tbPathRelative.Text == "" || !Directory.Exists(Path.GetFullPath(tbPathRelative.Text)))
+                {
+                    errMessage = "相対パスを正しく入力してください。";
+                }
             }
             return errMessage;
         }

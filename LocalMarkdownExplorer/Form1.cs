@@ -17,7 +17,8 @@ namespace LocalMarkdownExplorer
     {
         string targetPath;
         Encoding fileEncode;
-        string[] textExtension = { ".txt", ".md" };
+        string[] extensionText;
+        string[] extensionIgnore;
         bool isFirstLoad = true;
 
         SelectedFile selectedFile = new SelectedFile();
@@ -26,6 +27,8 @@ namespace LocalMarkdownExplorer
         {
             InitializeComponent();
         }
+
+        #region 初期化メソッド============================================================
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -37,10 +40,13 @@ namespace LocalMarkdownExplorer
             Util.IniFile inifile = new Util.IniFile("config.ini");
             if (inifile.Data("PathType") == "")
             {
+                // 初期設定
                 inifile.data["PathType"] = "Absolute";
                 inifile.data["AbsolutePath"] = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 inifile.data["RelativePath"] = "";
                 inifile.data["FileEncode"] = "Shift_JIS";
+                inifile.data["ExtensionText"] = "txt,md";
+                inifile.data["ExtensionIgnore"] = "exe,dll";
                 inifile.Save();
 
                 FormSetting f = new FormSetting(this);
@@ -49,6 +55,7 @@ namespace LocalMarkdownExplorer
             }
             else
             {
+                // パス
                 if (inifile.Data("PathType") == "Absolute")
                 {
                     targetPath = inifile.Data("AbsolutePath") + "\\";
@@ -57,7 +64,13 @@ namespace LocalMarkdownExplorer
                 {
                     targetPath = Path.GetFullPath(inifile.Data("RelativePath"));
                 }
+                // エンコーディング
                 fileEncode = Encoding.GetEncoding(inifile.Data("FileEncode"));
+                // 拡張子
+                extensionText = inifile.Data("ExtensionText").Split(',');
+                for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
+                extensionIgnore = inifile.Data("ExtensionIgnore").Split(',');
+                for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
 
                 this.Text = "LocalMarkdownExplorer  [" + Util.Path.GetLastDir(targetPath) + "]";
 
@@ -73,6 +86,7 @@ namespace LocalMarkdownExplorer
                 this.isFirstLoad = false;
             }
         }
+        #endregion
 
 
         #region クリックイベントメソッド============================================================
@@ -235,7 +249,7 @@ namespace LocalMarkdownExplorer
                 string txt = dictionaryEntry.Key.ToString();
                 string extension = Path.GetExtension(txt);
                 int imgWidth = Resource1.DoucmentHS.Width;
-                if (Array.IndexOf(textExtension, extension) != -1)
+                if (Array.IndexOf(extensionText, extension) != -1)
                 {
                     e.Graphics.DrawImage(Resource1.DoucmentHS, e.Bounds.X, e.Bounds.Y);
                 }
@@ -281,6 +295,9 @@ namespace LocalMarkdownExplorer
                 string key = fullpath.Replace(sDir, "");
                 string value = fullpath;
 
+                // 無視拡張子
+                if (Array.IndexOf(extensionIgnore, extension) != -1) continue;
+
                 if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
                 {
                     this.lbMdList.Items.Add(new DictionaryEntry(key, value));
@@ -291,7 +308,7 @@ namespace LocalMarkdownExplorer
                     {
                         long fileSize = new FileInfo(fullpath).Length;
                         // テキストファイルであれば内容を検索, 1MB以下のファイルのみ
-                        if (Array.IndexOf(textExtension, extension) != -1 && fileSize <= 1000000)
+                        if (Array.IndexOf(extensionText, extension) != -1 && fileSize <= 1000000)
                         {
                             if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
                             {
@@ -309,7 +326,7 @@ namespace LocalMarkdownExplorer
 
             this.tbTitle.Text = selectedFile.fileName;
             // テキストファイル
-            if (Array.IndexOf(textExtension, selectedFile.extension) != -1)
+            if (Array.IndexOf(extensionText, selectedFile.extension) != -1)
             {
                 tabEditor.Visible = true;
 
