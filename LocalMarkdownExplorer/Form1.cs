@@ -61,7 +61,7 @@ namespace LocalMarkdownExplorer
 
                 this.Text = "LocalMarkdownExplorer  [" + Util.Path.GetLastDir(targetPath) + "]";
 
-                this.lbCautionMessge.Text = "内容を変更中";
+                this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
 
                 this.InitViewListBox();
@@ -213,6 +213,42 @@ namespace LocalMarkdownExplorer
         private void tbMd_TextChanged(object sender, EventArgs e)
         {
             if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
+        }
+
+        private void lbMdList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+
+            if (e.Index > -1)
+            {
+                Brush b = null;
+                if ((e.State & DrawItemState.Selected) != DrawItemState.Selected)
+                {
+                    b = new SolidBrush(Color.Black);
+                }
+                else
+                {
+                    b = new SolidBrush(e.ForeColor);
+                }
+                DictionaryEntry dictionaryEntry = (DictionaryEntry)((ListBox)sender).Items[e.Index];
+                
+                string txt = dictionaryEntry.Key.ToString();
+                string extension = Path.GetExtension(txt);
+                int imgWidth = Resource1.DoucmentHS.Width;
+                if (Array.IndexOf(textExtension, extension) != -1)
+                {
+                    e.Graphics.DrawImage(Resource1.DoucmentHS, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(Resource1.RightToLeftDoucmentHS, e.Bounds.X, e.Bounds.Y);
+                }
+                e.Graphics.DrawString(txt, e.Font, b, e.Bounds.X + imgWidth, e.Bounds.Y);
+
+                b.Dispose();
+            }
+
+            e.DrawFocusRectangle();
         }
 
         #endregion
@@ -408,7 +444,7 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
-
+        
 
     }
 }
