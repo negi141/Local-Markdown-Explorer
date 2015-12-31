@@ -7,7 +7,7 @@ LocalMarkdownExplorerは、ローカルのMarkdownファイル用のエクスプ
 日本語のみです。
 
 ## 画面
-![](http://daybreak3d.nobody.jp/image/tmp/ss03.png)
+![](http://daybreak3d.nobody.jp/image/tmp/ss04.png)
 
 ## 利用
 [LocalMarkdownExplorer.zip](https://github.com/negi141/LocalMarkdownExplorer/raw/master/bin/LocalMarkdownExplorer.zip)

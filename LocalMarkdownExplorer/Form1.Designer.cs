@@ -78,7 +78,7 @@
             this.btnAdd.Image = global::LocalMarkdownExplorer.Resource1.NewDocumentHS;
             this.btnAdd.Location = new System.Drawing.Point(76, 12);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(87, 23);
+            this.btnAdd.Size = new System.Drawing.Size(87, 26);
             this.btnAdd.TabIndex = 30;
             this.btnAdd.Text = "新規作成";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -197,9 +197,9 @@
             // btnSave
             // 
             this.btnSave.Image = global::LocalMarkdownExplorer.Resource1.saveHS;
-            this.btnSave.Location = new System.Drawing.Point(341, 23);
+            this.btnSave.Location = new System.Drawing.Point(341, 21);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(69, 23);
+            this.btnSave.Size = new System.Drawing.Size(59, 26);
             this.btnSave.TabIndex = 44;
             this.btnSave.Text = "保存";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -209,9 +209,9 @@
             // btnOpenFile
             // 
             this.btnOpenFile.Image = global::LocalMarkdownExplorer.Resource1.RightToLeftDoucmentHS;
-            this.btnOpenFile.Location = new System.Drawing.Point(416, 23);
+            this.btnOpenFile.Location = new System.Drawing.Point(406, 21);
             this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(93, 23);
+            this.btnOpenFile.Size = new System.Drawing.Size(93, 26);
             this.btnOpenFile.TabIndex = 49;
             this.btnOpenFile.Text = "ファイルを開く";
             this.btnOpenFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -223,7 +223,7 @@
             this.btnOpenDir.Image = global::LocalMarkdownExplorer.Resource1.FolderOpen_16x16_72;
             this.btnOpenDir.Location = new System.Drawing.Point(169, 12);
             this.btnOpenDir.Name = "btnOpenDir";
-            this.btnOpenDir.Size = new System.Drawing.Size(98, 23);
+            this.btnOpenDir.Size = new System.Drawing.Size(98, 26);
             this.btnOpenDir.TabIndex = 50;
             this.btnOpenDir.Text = "フォルダを開く";
             this.btnOpenDir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -245,7 +245,7 @@
             this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.properties_16xMD;
             this.btnSetting.Location = new System.Drawing.Point(12, 12);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(58, 23);
+            this.btnSetting.Size = new System.Drawing.Size(58, 26);
             this.btnSetting.TabIndex = 52;
             this.btnSetting.Text = "設定";
             this.btnSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -274,9 +274,9 @@
             // btnDelete
             // 
             this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.DeleteHS;
-            this.btnDelete.Location = new System.Drawing.Point(515, 23);
+            this.btnDelete.Location = new System.Drawing.Point(505, 21);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(72, 23);
+            this.btnDelete.Size = new System.Drawing.Size(56, 26);
             this.btnDelete.TabIndex = 52;
             this.btnDelete.Text = "削除";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
