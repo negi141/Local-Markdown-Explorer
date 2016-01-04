@@ -461,6 +461,11 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.tbSearch.Focus();
+        }
         
 
     }
