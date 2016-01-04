@@ -13,6 +13,8 @@ namespace LocalMarkdownExplorer
     public partial class FormSetting : Form
     {
         Form1 form1;
+        Config config = new Config();
+
         public FormSetting(Form1 parent)
         {
             form1 = parent;
@@ -21,14 +23,12 @@ namespace LocalMarkdownExplorer
 
         private void FormSetting_Load(object sender, EventArgs e)
         {
-            Util.IniFile inifile = new Util.IniFile("config.ini");
-
-            if (inifile.Data("PathType") == "Absolute") rbPathAbsolute.Select(); else rbPathRelative.Select();
-            tbPathAbsolute.Text = inifile.Data("AbsolutePath");
-            tbPathRelative.Text = inifile.Data("RelativePath");
-            ddlEncoding.Text = inifile.Data("FileEncode");
-            tbExtensionText.Text = inifile.Data("ExtensionText");
-            tbExtensionIgnore.Text = inifile.Data("ExtensionIgnore");
+            if (config.PathType == "Absolute") rbPathAbsolute.Select(); else rbPathRelative.Select();
+            tbPathAbsolute.Text = config.AbsolutePath;
+            tbPathRelative.Text = config.RelativePath;
+            ddlEncoding.Text = config.FileEncode;
+            tbExtensionText.Text = config.ExtensionText;
+            tbExtensionIgnore.Text = config.ExtensionIgnore;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -38,14 +38,13 @@ namespace LocalMarkdownExplorer
                 MessageBox.Show(err);
                 return;
             }
-            Util.IniFile inifile = new Util.IniFile("config.ini");
-            inifile.data["PathType"] = (rbPathAbsolute.Checked) ? "Absolute" : "Relative";
-            inifile.data["AbsolutePath"] = tbPathAbsolute.Text;
-            inifile.data["RelativePath"] = tbPathRelative.Text;
-            inifile.data["FileEncode"] = ddlEncoding.SelectedItem.ToString();
-            inifile.data["ExtensionText"] = tbExtensionText.Text;
-            inifile.data["ExtensionIgnore"] = tbExtensionIgnore.Text;
-            inifile.Save();
+            config.PathType = (rbPathAbsolute.Checked) ? "Absolute" : "Relative";
+            config.AbsolutePath = tbPathAbsolute.Text;
+            config.RelativePath = tbPathRelative.Text;
+            config.FileEncode = ddlEncoding.SelectedItem.ToString();
+            config.ExtensionText = tbExtensionText.Text;
+            config.ExtensionIgnore = tbExtensionIgnore.Text;
+            config.Save();
             form1.initLoad();
             this.Close();
         }

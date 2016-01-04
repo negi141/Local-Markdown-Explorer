@@ -15,6 +15,7 @@ namespace LocalMarkdownExplorer
 {
     public partial class Form1 : Form
     {
+        Config config = new Config();
         string targetPath;
         Encoding fileEncode;
         string[] extensionText;
@@ -37,17 +38,16 @@ namespace LocalMarkdownExplorer
 
         public void initLoad()
         {
-            Util.IniFile inifile = new Util.IniFile("config.ini");
-            if (inifile.Data("PathType") == "")
+            if (config.PathType == "")
             {
                 // 初期設定
-                inifile.data["PathType"] = "Absolute";
-                inifile.data["AbsolutePath"] = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                inifile.data["RelativePath"] = "";
-                inifile.data["FileEncode"] = "Shift_JIS";
-                inifile.data["ExtensionText"] = "txt,md";
-                inifile.data["ExtensionIgnore"] = "exe,dll";
-                inifile.Save();
+                config.PathType = "Absolute";
+                config.AbsolutePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                config.RelativePath = "";
+                config.FileEncode = "Shift_JIS";
+                config.ExtensionText = "txt,md";
+                config.ExtensionIgnore = "exe,dll";
+                config.Save();
 
                 FormSetting f = new FormSetting(this);
                 f.ShowDialog(this);
@@ -56,20 +56,20 @@ namespace LocalMarkdownExplorer
             else
             {
                 // パス
-                if (inifile.Data("PathType") == "Absolute")
+                if (config.PathType == "Absolute")
                 {
-                    targetPath = inifile.Data("AbsolutePath") + "\\";
+                    targetPath = config.AbsolutePath + "\\";
                 }
-                else if (inifile.Data("PathType") == "Relative")
+                else if (config.PathType == "Relative")
                 {
-                    targetPath = Path.GetFullPath(inifile.Data("RelativePath"));
+                    targetPath = Path.GetFullPath(config.Data("RelativePath"));
                 }
                 // エンコーディング
-                fileEncode = Encoding.GetEncoding(inifile.Data("FileEncode"));
+                fileEncode = Encoding.GetEncoding(config.FileEncode);
                 // 拡張子
-                extensionText = inifile.Data("ExtensionText").Split(',');
+                extensionText = config.ExtensionText.Split(',');
                 for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
-                extensionIgnore = inifile.Data("ExtensionIgnore").Split(',');
+                extensionIgnore = config.ExtensionIgnore.Split(',');
                 for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
 
                 this.Text = "LocalMarkdownExplorer  [" + Util.Path.GetLastDir(targetPath) + "]";
