@@ -70,7 +70,7 @@
             this.tbSearch.Location = new System.Drawing.Point(48, 51);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(232, 23);
-            this.tbSearch.TabIndex = 31;
+            this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // btnAdd
@@ -79,7 +79,7 @@
             this.btnAdd.Location = new System.Drawing.Point(76, 12);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(87, 26);
-            this.btnAdd.TabIndex = 30;
+            this.btnAdd.TabIndex = 10;
             this.btnAdd.Text = "新規作成";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             this.lbMdList.Location = new System.Drawing.Point(12, 85);
             this.lbMdList.Name = "lbMdList";
             this.lbMdList.Size = new System.Drawing.Size(287, 532);
-            this.lbMdList.TabIndex = 28;
+            this.lbMdList.TabIndex = 25;
             this.lbMdList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbMdList_DrawItem);
             this.lbMdList.SelectedIndexChanged += new System.EventHandler(this.lbMdList_SelectedIndexChanged);
             // 
@@ -112,7 +112,7 @@
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.SelectedIndex = 0;
             this.tabEditor.Size = new System.Drawing.Size(614, 555);
-            this.tabEditor.TabIndex = 48;
+            this.tabEditor.TabIndex = 50;
             this.tabEditor.SelectedIndexChanged += new System.EventHandler(this.tabEditor_SelectedIndexChanged);
             // 
             // tabText
@@ -191,7 +191,7 @@
             this.tbTitle.Location = new System.Drawing.Point(11, 23);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(324, 23);
-            this.tbTitle.TabIndex = 45;
+            this.tbTitle.TabIndex = 30;
             this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
             // btnSave
@@ -200,7 +200,7 @@
             this.btnSave.Location = new System.Drawing.Point(341, 21);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(59, 26);
-            this.btnSave.TabIndex = 44;
+            this.btnSave.TabIndex = 35;
             this.btnSave.Text = "保存";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@
             this.btnOpenFile.Location = new System.Drawing.Point(406, 21);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(93, 26);
-            this.btnOpenFile.TabIndex = 49;
+            this.btnOpenFile.TabIndex = 40;
             this.btnOpenFile.Text = "ファイルを開く";
             this.btnOpenFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOpenFile.UseVisualStyleBackColor = true;
@@ -224,7 +224,7 @@
             this.btnOpenDir.Location = new System.Drawing.Point(169, 12);
             this.btnOpenDir.Name = "btnOpenDir";
             this.btnOpenDir.Size = new System.Drawing.Size(98, 26);
-            this.btnOpenDir.TabIndex = 50;
+            this.btnOpenDir.TabIndex = 15;
             this.btnOpenDir.Text = "フォルダを開く";
             this.btnOpenDir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOpenDir.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
             this.btnSetting.Location = new System.Drawing.Point(12, 12);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(58, 26);
-            this.btnSetting.TabIndex = 52;
+            this.btnSetting.TabIndex = 5;
             this.btnSetting.Text = "設定";
             this.btnSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSetting.UseVisualStyleBackColor = true;
@@ -277,7 +277,7 @@
             this.btnDelete.Location = new System.Drawing.Point(505, 21);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(56, 26);
-            this.btnDelete.TabIndex = 52;
+            this.btnDelete.TabIndex = 45;
             this.btnDelete.Text = "削除";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
