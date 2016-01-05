@@ -13,7 +13,7 @@ namespace LocalMarkdownExplorer
     public partial class FormSetting : Form
     {
         Form1 form1;
-        Config config = new Config();
+        Config config;
 
         public FormSetting(Form1 parent)
         {
@@ -23,6 +23,7 @@ namespace LocalMarkdownExplorer
 
         private void FormSetting_Load(object sender, EventArgs e)
         {
+            config = new Config();
             if (config.PathType == "Absolute") rbPathAbsolute.Select(); else rbPathRelative.Select();
             tbPathAbsolute.Text = config.AbsolutePath;
             tbPathRelative.Text = config.RelativePath;

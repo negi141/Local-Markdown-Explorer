@@ -15,7 +15,7 @@ namespace LocalMarkdownExplorer
 {
     public partial class Form1 : Form
     {
-        Config config = new Config();
+        Config config;
         string targetPath;
         Encoding fileEncode;
         string[] extensionText;
@@ -38,12 +38,13 @@ namespace LocalMarkdownExplorer
 
         public void initLoad()
         {
+            config = new Config();
             if (config.PathType == "")
             {
                 // 初期設定
                 config.PathType = "Absolute";
                 config.AbsolutePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                config.RelativePath = "";
+                config.RelativePath = "..\\";
                 config.FileEncode = "Shift_JIS";
                 config.ExtensionText = "txt,md";
                 config.ExtensionIgnore = "exe,dll";
@@ -62,7 +63,7 @@ namespace LocalMarkdownExplorer
                 }
                 else if (config.PathType == "Relative")
                 {
-                    targetPath = Path.GetFullPath(config.Data("RelativePath"));
+                    targetPath = Path.GetFullPath(config.RelativePath);
                 }
                 // エンコーディング
                 fileEncode = Encoding.GetEncoding(config.FileEncode);
