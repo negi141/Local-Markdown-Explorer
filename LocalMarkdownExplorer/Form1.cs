@@ -73,7 +73,7 @@ namespace LocalMarkdownExplorer
                 extensionIgnore = config.ExtensionIgnore.Split(',');
                 for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
 
-                this.Text = "LocalMarkdownExplorer  [" + Util.Path.GetLastDir(targetPath) + "]";
+                this.Text = "LocalMarkdownExplorer  [" + targetPath + "]";
 
                 this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
@@ -86,6 +86,11 @@ namespace LocalMarkdownExplorer
 
                 this.isFirstLoad = false;
             }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.tbSearch.Focus();
         }
         #endregion
 
@@ -121,7 +126,6 @@ namespace LocalMarkdownExplorer
             }
             else
             {
-                selectedFile = getSelectedItem();
                 string oldFileName = selectedFile.fileName;
                 string newFileName = this.tbTitle.Text;
                 bool cancel = false;
@@ -162,8 +166,6 @@ namespace LocalMarkdownExplorer
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            selectedFile = getSelectedItem();
-
             DialogResult result = MessageBox.Show(selectedFile.fileName + "を削除してよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (result == DialogResult.OK)
             {
@@ -175,8 +177,6 @@ namespace LocalMarkdownExplorer
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
-            selectedFile = getSelectedItem();
-
             Util.IO.ProcessStart(selectedFile.fullPath);
         }
 
@@ -191,7 +191,6 @@ namespace LocalMarkdownExplorer
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            this.groupBoxFile.Enabled = false;
             this.SetViewListBox(this.tbSearch.Text.ToLower(), true);
         }
 
@@ -205,7 +204,7 @@ namespace LocalMarkdownExplorer
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -217,7 +216,7 @@ namespace LocalMarkdownExplorer
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
         private void tbTitle_TextChanged(object sender, EventArgs e)
@@ -325,6 +324,8 @@ namespace LocalMarkdownExplorer
         {
             selectedFile = getSelectedItem();
 
+            if (selectedFile == null) return;
+
             this.tbTitle.Text = selectedFile.fileName;
             // テキストファイル
             if (Array.IndexOf(extensionText, selectedFile.extension) != -1)
@@ -343,6 +344,7 @@ namespace LocalMarkdownExplorer
         private SelectedFile getSelectedItem()
         {
             SelectedFile file = new SelectedFile();
+            if (this.lbMdList.SelectedItem == null) return null;
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
             file.fileName = dictionaryEntry.Key.ToString();
             file.fullPath = dictionaryEntry.Value.ToString();
@@ -463,11 +465,6 @@ namespace LocalMarkdownExplorer
         }
         #endregion
 
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            this.tbSearch.Focus();
-        }
-        
 
     }
 }
