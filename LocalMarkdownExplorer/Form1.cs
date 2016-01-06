@@ -114,6 +114,11 @@ namespace LocalMarkdownExplorer
             this.lbMdList.Text = tempTitle;
 
             openSelectFile();
+
+            this.tabEditor.SelectedIndex = 0;
+
+            this.tbTitle.Focus();
+            this.tbTitle.Select(0, 15);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
