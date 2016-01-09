@@ -34,7 +34,7 @@
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
-            this.tbMd = new System.Windows.Forms.TextBox();
+            this.rtbMd = new System.Windows.Forms.RichTextBox();
             this.tabMd = new System.Windows.Forms.TabPage();
             this.webMd = new System.Windows.Forms.WebBrowser();
             this.tabHTML = new System.Windows.Forms.TabPage();
@@ -42,10 +42,10 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lbCautionMessge = new System.Windows.Forms.Label();
             this.groupBoxFile = new System.Windows.Forms.GroupBox();
-            this.lbAssist = new System.Windows.Forms.ListBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
+            this.lbAssist = new System.Windows.Forms.ListBox();
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -74,7 +74,7 @@
             this.tbSearch.Size = new System.Drawing.Size(232, 23);
             this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
-            this.tbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // lbMdList
             // 
@@ -108,7 +108,7 @@
             // 
             // tabText
             // 
-            this.tabText.Controls.Add(this.tbMd);
+            this.tabText.Controls.Add(this.rtbMd);
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
@@ -117,19 +117,18 @@
             this.tabText.Text = "　　Text Editor　　";
             this.tabText.UseVisualStyleBackColor = true;
             // 
-            // tbMd
+            // rtbMd
             // 
-            this.tbMd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMd.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbMd.Location = new System.Drawing.Point(6, 6);
-            this.tbMd.Multiline = true;
-            this.tbMd.Name = "tbMd";
-            this.tbMd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMd.Size = new System.Drawing.Size(594, 517);
-            this.tbMd.TabIndex = 30;
-            this.tbMd.TextChanged += new System.EventHandler(this.tbMd_TextChanged);
+            this.rtbMd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbMd.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbMd.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rtbMd.Location = new System.Drawing.Point(3, 6);
+            this.rtbMd.Name = "rtbMd";
+            this.rtbMd.Size = new System.Drawing.Size(600, 520);
+            this.rtbMd.TabIndex = 31;
+            this.rtbMd.Text = "";
+            this.rtbMd.WordWrap = false;
+            this.rtbMd.TextChanged += new System.EventHandler(this.rtbMd_TextChanged);
             // 
             // tabMd
             // 
@@ -167,7 +166,7 @@
             this.tbHTML.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbHTML.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbHTML.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbHTML.Location = new System.Drawing.Point(6, 6);
             this.tbHTML.Multiline = true;
             this.tbHTML.Name = "tbHTML";
@@ -214,17 +213,6 @@
             this.groupBoxFile.TabStop = false;
             this.groupBoxFile.Text = "ファイル";
             // 
-            // lbAssist
-            // 
-            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbAssist.FormattingEnabled = true;
-            this.lbAssist.Location = new System.Drawing.Point(48, 68);
-            this.lbAssist.Name = "lbAssist";
-            this.lbAssist.Size = new System.Drawing.Size(285, 17);
-            this.lbAssist.TabIndex = 54;
-            this.lbAssist.Visible = false;
-            this.lbAssist.SelectedIndexChanged += new System.EventHandler(this.lbAssist_SelectedIndexChanged);
-            // 
             // btnDelete
             // 
             this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.DeleteHS;
@@ -260,6 +248,18 @@
             this.btnOpenFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // lbAssist
+            // 
+            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbAssist.FormattingEnabled = true;
+            this.lbAssist.Location = new System.Drawing.Point(48, 68);
+            this.lbAssist.Name = "lbAssist";
+            this.lbAssist.Size = new System.Drawing.Size(285, 17);
+            this.lbAssist.TabIndex = 54;
+            this.lbAssist.Visible = false;
+            this.lbAssist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAssist_KeyDown);
+            this.lbAssist.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbAssist_MouseUp);
             // 
             // btnSetting
             // 
@@ -330,7 +330,6 @@
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabEditor.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
-            this.tabText.PerformLayout();
             this.tabMd.ResumeLayout(false);
             this.tabHTML.ResumeLayout(false);
             this.tabHTML.PerformLayout();
@@ -349,7 +348,6 @@
         private System.Windows.Forms.ListBox lbMdList;
         private System.Windows.Forms.TabControl tabEditor;
         private System.Windows.Forms.TabPage tabText;
-        private System.Windows.Forms.TextBox tbMd;
         private System.Windows.Forms.TabPage tabMd;
         private System.Windows.Forms.WebBrowser webMd;
         private System.Windows.Forms.TextBox tbTitle;
@@ -364,6 +362,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ListBox lbAssist;
         private System.Windows.Forms.LinkLabel linkBack;
+        private System.Windows.Forms.RichTextBox rtbMd;
     }
 }
 

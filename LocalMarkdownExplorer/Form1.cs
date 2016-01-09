@@ -157,13 +157,13 @@ namespace LocalMarkdownExplorer
 
                 if (!cancel)
                 {
-                    Util.IO.SaveFile(targetPath + newFileName, this.tbMd.Text, fileEncode);
+                    Util.IO.SaveFile(targetPath + newFileName, this.rtbMd.Text, fileEncode);
 
                     this.InitViewListBox();
 
                     this.lbMdList.Text = newFileName;
 
-                    openSelectFile();
+                    lbMdList_SelectedIndexChanged(null, null);
                 }
             }
         }
@@ -199,13 +199,13 @@ namespace LocalMarkdownExplorer
 
         #region 選択イベントメソッド============================================================
 
-        private void lbAssist_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void lbAssist_MouseUp(object sender, MouseEventArgs e)
         {
             lbAssist.Visible = false;
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
             this.lbMdList.Text = dictionaryEntry.Key.ToString();
         }
-
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFile = getSelectedItem();
@@ -219,16 +219,22 @@ namespace LocalMarkdownExplorer
 
                 linkBack.Visible = true;
             }
-
-            this.groupBoxFile.Enabled = true;
-            openSelectFile();
-            try
+            else
             {
-                this.displayMarkDown();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                this.groupBoxFile.Enabled = true;
+                openSelectFile();
+                rtbMd.Select(0, rtbMd.Text.Length);
+                rtbMd.SelectionColor = Color.Black;
+                highLight();
+                lbCautionMessge.Visible = false;
+                try
+                {
+                    this.displayMarkDown();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -242,6 +248,7 @@ namespace LocalMarkdownExplorer
             {
                 MessageBox.Show(ex.Message);
             }
+            rtbMd.Focus();
         }
 
         private void lbMdList_DrawItem(object sender, DrawItemEventArgs e)
@@ -286,6 +293,27 @@ namespace LocalMarkdownExplorer
 
         #region テキストイベントメソッド============================================================
 
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (lbAssist.Visible)
+                {
+                    lbAssist.SelectedIndex = 0;
+                    lbAssist.Focus();
+                }
+            }
+        }
+        private void lbAssist_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                lbAssist.Visible = false;
+                DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
+                this.lbMdList.Text = dictionaryEntry.Key.ToString();
+            }
+        }
+
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
             if (tbSearch.Text == "")
@@ -296,19 +324,38 @@ namespace LocalMarkdownExplorer
             this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
         }
 
-        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
         private void tbTitle_TextChanged(object sender, EventArgs e)
         {
             if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
         }
 
-        private void tbMd_TextChanged(object sender, EventArgs e)
+        private void rtbMd_TextChanged(object sender, EventArgs e)
         {
             if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
         }
+        private void highLight()
+        {
+            string tokens = @"(^#* |^~*)";
+            Regex rex = new Regex(tokens);
 
+            string[] lines = new Regex("\n").Split(rtbMd.Text);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                int StartCursorPosition = rtbMd.SelectionStart;
+                MatchCollection mc = rex.Matches(lines[i]);
+                foreach (Match m in mc)
+                {
+                    int startIndex = rtbMd.GetFirstCharIndexFromLine(i) + m.Groups[1].Index;
+                    int StopIndex = m.Groups[1].Length;
+                    rtbMd.Select(startIndex, StopIndex);
+                    rtbMd.SelectionColor = Color.Blue;
+
+                    rtbMd.Select(StartCursorPosition, 0);
+                    rtbMd.SelectionColor = Color.Black;
+                }
+            }
+        }
         #endregion
 
 
@@ -397,7 +444,7 @@ namespace LocalMarkdownExplorer
             {
                 tabEditor.Visible = true;
 
-                this.tbMd.Text = Util.IO.GetFileReadToEnd(selectedFile.fullPath, fileEncode);
+                this.rtbMd.Text = Util.IO.GetFileReadToEnd(selectedFile.fullPath, fileEncode);
             }
             else
             { // それ以外は実行する
@@ -420,7 +467,7 @@ namespace LocalMarkdownExplorer
 
             Markdown m = new Markdown();
             m.ExtraMode = true;
-            content = m.Transform(tbMd.Text);
+            content = m.Transform(rtbMd.Text);
 
             // チェック用
             tbHTML.Text = content;
@@ -526,6 +573,9 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
+
+
+
 
     }
 }
