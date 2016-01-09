@@ -105,20 +105,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <None Include="Resources\Folder_16x16.png" />
     <None Include="Resources\RightToLeftDoucmentHS1.png" />
-    <None Include="Resources\Textfile_818_16x.png" />
     <None Include="Resources\DeleteHS.png" />
     <None Include="Resources\RightToLeftDoucmentHS.png" />
     <None Include="Resources\saveHS.png" />
     <None Include="Resources\FolderOpen_16x16_72.png" />
     <None Include="Resources\NewDocumentHS.png" />
-    <None Include="Resources\NewDocument.bmp" />
     <None Include="Resources\properties_16xMD.png" />
-    <None Include="Resources\TabControl_707.png" />
-    <None Include="Resources\Icon2.ico" />
-    <None Include="Resources\Icon1.ico" />
-    <None Include="Resources\ImgListOther.bmp" />
-    <None Include="Resources\Image1.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

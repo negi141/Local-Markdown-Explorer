@@ -21,15 +21,14 @@ namespace LocalMarkdownExplorer
         string[] extensionText;
         string[] extensionIgnore;
         bool isFirstLoad = true;
+        SelectedFile selectedFile;
 
-        SelectedFile selectedFile = new SelectedFile();
+        #region 初期化メソッド============================================================
 
         public Form1()
         {
             InitializeComponent();
         }
-
-        #region 初期化メソッド============================================================
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -95,7 +94,7 @@ namespace LocalMarkdownExplorer
         #endregion
 
 
-        #region クリックイベントメソッド============================================================
+        #region ボタンクリックイベントメソッド============================================================
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
@@ -189,25 +188,16 @@ namespace LocalMarkdownExplorer
         {
             Util.IO.ProcessStart(targetPath);
         }
+
+        private void linkBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            initLoad();
+            linkBack.Visible = false;
+        }
         #endregion
 
 
-        #region その他イベントメソッド============================================================
-
-        private void tbSearch_TextChanged(object sender, EventArgs e)
-        {
-            if (tbSearch.Text == "")
-            {
-                lbAssist.Visible = false;
-                return;
-            }
-            this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
-        }
-
-        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
+        #region 選択イベントメソッド============================================================
 
         private void lbAssist_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -218,6 +208,18 @@ namespace LocalMarkdownExplorer
 
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            selectedFile = getSelectedItem();
+            if (selectedFile == null) return;
+
+            if (selectedFile.isDirectory)
+            {
+                targetPath = selectedFile.fullPath + "\\";
+
+                this.InitViewListBox();
+
+                linkBack.Visible = true;
+            }
+
             this.groupBoxFile.Enabled = true;
             openSelectFile();
             try
@@ -241,15 +243,6 @@ namespace LocalMarkdownExplorer
                 MessageBox.Show(ex.Message);
             }
         }
-        private void tbTitle_TextChanged(object sender, EventArgs e)
-        {
-            if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
-        }
-
-        private void tbMd_TextChanged(object sender, EventArgs e)
-        {
-            if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
-        }
 
         private void lbMdList_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -267,11 +260,13 @@ namespace LocalMarkdownExplorer
                     b = new SolidBrush(e.ForeColor);
                 }
                 DictionaryEntry dictionaryEntry = (DictionaryEntry)((ListBox)sender).Items[e.Index];
-                
-                string txt = dictionaryEntry.Key.ToString();
-                string extension = Path.GetExtension(txt);
+                SelectedFile file = (SelectedFile)dictionaryEntry.Value;
                 int imgWidth = Resource1.DoucmentHS.Width;
-                if (Array.IndexOf(extensionText, extension) != -1)
+                if (file.isDirectory)
+                {
+                    e.Graphics.DrawImage(Resource1.Folder_16x16, e.Bounds.X, e.Bounds.Y);
+                }
+                else if (Array.IndexOf(extensionText, file.extension) != -1)
                 {
                     e.Graphics.DrawImage(Resource1.DoucmentHS, e.Bounds.X, e.Bounds.Y);
                 }
@@ -279,12 +274,39 @@ namespace LocalMarkdownExplorer
                 {
                     e.Graphics.DrawImage(Resource1.RightToLeftDoucmentHS, e.Bounds.X, e.Bounds.Y);
                 }
-                e.Graphics.DrawString(txt, e.Font, b, e.Bounds.X + imgWidth, e.Bounds.Y);
+                e.Graphics.DrawString(file.fileName, e.Font, b, e.Bounds.X + imgWidth, e.Bounds.Y);
 
                 b.Dispose();
             }
 
             e.DrawFocusRectangle();
+        }
+        #endregion
+
+
+        #region テキストイベントメソッド============================================================
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tbSearch.Text == "")
+            {
+                lbAssist.Visible = false;
+                return;
+            }
+            this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
+        }
+
+        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+        private void tbTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
+        }
+
+        private void tbMd_TextChanged(object sender, EventArgs e)
+        {
+            if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
         }
 
         #endregion
@@ -321,13 +343,22 @@ namespace LocalMarkdownExplorer
         private void DirSearch(ListBox listBox, string sDir, string searchWord, bool enableDetailSearch)
         {
             string[] searchWords = searchWord.Split(' ');
+            string[] arrayDir = Directory.GetDirectories(sDir);
+
+            for (int i = 0; i < arrayDir.Length; i++)
+            {
+                string fullpath = arrayDir[i];
+                string key = fullpath.Replace(sDir, "");
+                object value = new SelectedFile(true, key, fullpath, "");
+                listBox.Items.Add(new DictionaryEntry(key, value));
+            }
             string[] array = Directory.GetFiles(sDir);
             for (int i = 0; i < array.Length; i++)
             {
                 string fullpath = array[i];
                 string extension = Path.GetExtension(fullpath);
                 string key = fullpath.Replace(sDir, "");
-                string value = fullpath;
+                object value = new SelectedFile(false, key, fullpath, extension);
 
                 // 無視拡張子
                 if (Array.IndexOf(extensionIgnore, extension) != -1) continue;
@@ -377,12 +408,9 @@ namespace LocalMarkdownExplorer
 
         private SelectedFile getSelectedItem()
         {
-            SelectedFile file = new SelectedFile();
             if (this.lbMdList.SelectedItem == null) return null;
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbMdList.SelectedItem;
-            file.fileName = dictionaryEntry.Key.ToString();
-            file.fullPath = dictionaryEntry.Value.ToString();
-            file.extension = Path.GetExtension(file.fullPath);
+            SelectedFile file = (SelectedFile)dictionaryEntry.Value;
             return file;
         }
 
@@ -498,9 +526,6 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
-
-
-
 
     }
 }

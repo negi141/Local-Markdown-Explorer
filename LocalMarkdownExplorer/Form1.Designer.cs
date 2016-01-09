@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
@@ -41,14 +40,16 @@
             this.tabHTML = new System.Windows.Forms.TabPage();
             this.tbHTML = new System.Windows.Forms.TextBox();
             this.tbTitle = new System.Windows.Forms.TextBox();
+            this.lbCautionMessge = new System.Windows.Forms.Label();
+            this.groupBoxFile = new System.Windows.Forms.GroupBox();
+            this.lbAssist = new System.Windows.Forms.ListBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
-            this.btnOpenDir = new System.Windows.Forms.Button();
-            this.lbCautionMessge = new System.Windows.Forms.Label();
             this.btnSetting = new System.Windows.Forms.Button();
-            this.groupBoxFile = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.lbAssist = new System.Windows.Forms.ListBox();
+            this.btnOpenDir = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.linkBack = new System.Windows.Forms.LinkLabel();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -59,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 58);
+            this.label1.Location = new System.Drawing.Point(13, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 32;
@@ -68,24 +69,12 @@
             // tbSearch
             // 
             this.tbSearch.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbSearch.Location = new System.Drawing.Point(48, 51);
+            this.tbSearch.Location = new System.Drawing.Point(48, 46);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(232, 23);
             this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             this.tbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Image = global::LocalMarkdownExplorer.Resource1.NewDocumentHS;
-            this.btnAdd.Location = new System.Drawing.Point(76, 12);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(87, 26);
-            this.btnAdd.TabIndex = 10;
-            this.btnAdd.Text = "新規作成";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lbMdList
             // 
@@ -95,7 +84,7 @@
             this.lbMdList.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbMdList.FormattingEnabled = true;
             this.lbMdList.ItemHeight = 16;
-            this.lbMdList.Location = new System.Drawing.Point(12, 85);
+            this.lbMdList.Location = new System.Drawing.Point(12, 86);
             this.lbMdList.Name = "lbMdList";
             this.lbMdList.Size = new System.Drawing.Size(287, 532);
             this.lbMdList.TabIndex = 25;
@@ -196,6 +185,58 @@
             this.tbTitle.TabIndex = 30;
             this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
+            // lbCautionMessge
+            // 
+            this.lbCautionMessge.AutoSize = true;
+            this.lbCautionMessge.ForeColor = System.Drawing.Color.Tomato;
+            this.lbCautionMessge.Location = new System.Drawing.Point(42, 0);
+            this.lbCautionMessge.Name = "lbCautionMessge";
+            this.lbCautionMessge.Size = new System.Drawing.Size(92, 12);
+            this.lbCautionMessge.TabIndex = 51;
+            this.lbCautionMessge.Text = "lbCautionMessge";
+            // 
+            // groupBoxFile
+            // 
+            this.groupBoxFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxFile.Controls.Add(this.btnDelete);
+            this.groupBoxFile.Controls.Add(this.lbCautionMessge);
+            this.groupBoxFile.Controls.Add(this.btnSave);
+            this.groupBoxFile.Controls.Add(this.tbTitle);
+            this.groupBoxFile.Controls.Add(this.btnOpenFile);
+            this.groupBoxFile.Controls.Add(this.tabEditor);
+            this.groupBoxFile.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBoxFile.Location = new System.Drawing.Point(305, 5);
+            this.groupBoxFile.Name = "groupBoxFile";
+            this.groupBoxFile.Size = new System.Drawing.Size(629, 617);
+            this.groupBoxFile.TabIndex = 53;
+            this.groupBoxFile.TabStop = false;
+            this.groupBoxFile.Text = "ファイル";
+            // 
+            // lbAssist
+            // 
+            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbAssist.FormattingEnabled = true;
+            this.lbAssist.Location = new System.Drawing.Point(48, 68);
+            this.lbAssist.Name = "lbAssist";
+            this.lbAssist.Size = new System.Drawing.Size(285, 17);
+            this.lbAssist.TabIndex = 54;
+            this.lbAssist.Visible = false;
+            this.lbAssist.SelectedIndexChanged += new System.EventHandler(this.lbAssist_SelectedIndexChanged);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.DeleteHS;
+            this.btnDelete.Location = new System.Drawing.Point(505, 21);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(56, 26);
+            this.btnDelete.TabIndex = 45;
+            this.btnDelete.Text = "削除";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnSave
             // 
             this.btnSave.Image = global::LocalMarkdownExplorer.Resource1.saveHS;
@@ -220,28 +261,6 @@
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
-            // btnOpenDir
-            // 
-            this.btnOpenDir.Image = global::LocalMarkdownExplorer.Resource1.FolderOpen_16x16_72;
-            this.btnOpenDir.Location = new System.Drawing.Point(169, 12);
-            this.btnOpenDir.Name = "btnOpenDir";
-            this.btnOpenDir.Size = new System.Drawing.Size(98, 26);
-            this.btnOpenDir.TabIndex = 15;
-            this.btnOpenDir.Text = "フォルダを開く";
-            this.btnOpenDir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOpenDir.UseVisualStyleBackColor = true;
-            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
-            // 
-            // lbCautionMessge
-            // 
-            this.lbCautionMessge.AutoSize = true;
-            this.lbCautionMessge.ForeColor = System.Drawing.Color.Tomato;
-            this.lbCautionMessge.Location = new System.Drawing.Point(42, 0);
-            this.lbCautionMessge.Name = "lbCautionMessge";
-            this.lbCautionMessge.Size = new System.Drawing.Size(92, 12);
-            this.lbCautionMessge.TabIndex = 51;
-            this.lbCautionMessge.Text = "lbCautionMessge";
-            // 
             // btnSetting
             // 
             this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.properties_16xMD;
@@ -254,53 +273,48 @@
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
-            // groupBoxFile
+            // btnOpenDir
             // 
-            this.groupBoxFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxFile.Controls.Add(this.btnDelete);
-            this.groupBoxFile.Controls.Add(this.lbCautionMessge);
-            this.groupBoxFile.Controls.Add(this.btnSave);
-            this.groupBoxFile.Controls.Add(this.tbTitle);
-            this.groupBoxFile.Controls.Add(this.btnOpenFile);
-            this.groupBoxFile.Controls.Add(this.tabEditor);
-            this.groupBoxFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBoxFile.Location = new System.Drawing.Point(305, 5);
-            this.groupBoxFile.Name = "groupBoxFile";
-            this.groupBoxFile.Size = new System.Drawing.Size(629, 617);
-            this.groupBoxFile.TabIndex = 53;
-            this.groupBoxFile.TabStop = false;
-            this.groupBoxFile.Text = "ファイル";
+            this.btnOpenDir.Image = global::LocalMarkdownExplorer.Resource1.FolderOpen_16x16_72;
+            this.btnOpenDir.Location = new System.Drawing.Point(169, 12);
+            this.btnOpenDir.Name = "btnOpenDir";
+            this.btnOpenDir.Size = new System.Drawing.Size(98, 26);
+            this.btnOpenDir.TabIndex = 15;
+            this.btnOpenDir.Text = "フォルダを開く";
+            this.btnOpenDir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOpenDir.UseVisualStyleBackColor = true;
+            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
-            // btnDelete
+            // btnAdd
             // 
-            this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.DeleteHS;
-            this.btnDelete.Location = new System.Drawing.Point(505, 21);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(56, 26);
-            this.btnDelete.TabIndex = 45;
-            this.btnDelete.Text = "削除";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnAdd.Image = global::LocalMarkdownExplorer.Resource1.NewDocumentHS;
+            this.btnAdd.Location = new System.Drawing.Point(76, 12);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(87, 26);
+            this.btnAdd.TabIndex = 10;
+            this.btnAdd.Text = "新規作成";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lbAssist
+            // linkBack
             // 
-            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbAssist.FormattingEnabled = true;
-            this.lbAssist.Location = new System.Drawing.Point(48, 73);
-            this.lbAssist.Name = "lbAssist";
-            this.lbAssist.Size = new System.Drawing.Size(285, 17);
-            this.lbAssist.TabIndex = 54;
-            this.lbAssist.Visible = false;
-            this.lbAssist.SelectedIndexChanged += new System.EventHandler(this.lbAssist_SelectedIndexChanged);
+            this.linkBack.AutoSize = true;
+            this.linkBack.Location = new System.Drawing.Point(15, 73);
+            this.linkBack.Name = "linkBack";
+            this.linkBack.Size = new System.Drawing.Size(38, 12);
+            this.linkBack.TabIndex = 55;
+            this.linkBack.TabStop = true;
+            this.linkBack.Text = "＜戻る";
+            this.linkBack.Visible = false;
+            this.linkBack.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBack_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.linkBack);
             this.Controls.Add(this.lbAssist);
             this.Controls.Add(this.groupBoxFile);
             this.Controls.Add(this.btnSetting);
@@ -349,6 +363,7 @@
         private System.Windows.Forms.GroupBox groupBoxFile;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ListBox lbAssist;
+        private System.Windows.Forms.LinkLabel linkBack;
     }
 }
 
