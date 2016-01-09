@@ -48,6 +48,7 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.groupBoxFile = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.lbAssist = new System.Windows.Forms.ListBox();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -72,6 +73,7 @@
             this.tbSearch.Size = new System.Drawing.Size(232, 23);
             this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
             // 
             // btnAdd
             // 
@@ -283,11 +285,23 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // lbAssist
+            // 
+            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbAssist.FormattingEnabled = true;
+            this.lbAssist.Location = new System.Drawing.Point(48, 73);
+            this.lbAssist.Name = "lbAssist";
+            this.lbAssist.Size = new System.Drawing.Size(285, 17);
+            this.lbAssist.TabIndex = 54;
+            this.lbAssist.Visible = false;
+            this.lbAssist.SelectedIndexChanged += new System.EventHandler(this.lbAssist_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.lbAssist);
             this.Controls.Add(this.groupBoxFile);
             this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.btnOpenDir);
@@ -334,6 +348,7 @@
         private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.GroupBox groupBoxFile;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ListBox lbAssist;
     }
 }
 

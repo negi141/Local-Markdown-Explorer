@@ -196,7 +196,24 @@ namespace LocalMarkdownExplorer
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            this.SetViewListBox(this.tbSearch.Text.ToLower(), true);
+            if (tbSearch.Text == "")
+            {
+                lbAssist.Visible = false;
+                return;
+            }
+            this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
+        }
+
+        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void lbAssist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbAssist.Visible = false;
+            DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
+            this.lbMdList.Text = dictionaryEntry.Key.ToString();
         }
 
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,18 +295,30 @@ namespace LocalMarkdownExplorer
         private void InitViewListBox()
         {
             tbSearch.Text = "";
-            SetViewListBox("", false);
+            SetViewListBox();
         }
 
-        private void SetViewListBox(string searchWord, bool enableDetailSearch)
+        private void SetViewListBox()
         {
             this.lbMdList.Items.Clear();
             this.lbMdList.DisplayMember = "Key";
             this.lbMdList.ValueMember = "Value";
-            this.DirSearch(targetPath, searchWord, enableDetailSearch);
+            this.DirSearch(lbMdList, targetPath, "", false);
         }
 
-        private void DirSearch(string sDir, string searchWord, bool enableDetailSearch)
+        private void SetAssistListBox(string searchWord, bool enableDetailSearch)
+        {
+            lbAssist.Visible = true;
+            this.lbAssist.Items.Clear();
+            this.lbAssist.DisplayMember = "Key";
+            this.lbAssist.ValueMember = "Value";
+            this.DirSearch(lbAssist, targetPath, searchWord, enableDetailSearch);
+            var showLength = (this.lbAssist.Items.Count <= 10) ? this.lbAssist.Items.Count : 10;
+            if (showLength == 0) lbAssist.Visible = false;
+            this.lbAssist.Height = this.lbAssist.ItemHeight * (showLength+1);
+        }
+
+        private void DirSearch(ListBox listBox, string sDir, string searchWord, bool enableDetailSearch)
         {
             string[] searchWords = searchWord.Split(' ');
             string[] array = Directory.GetFiles(sDir);
@@ -305,7 +334,7 @@ namespace LocalMarkdownExplorer
 
                 if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
                 {
-                    this.lbMdList.Items.Add(new DictionaryEntry(key, value));
+                    listBox.Items.Add(new DictionaryEntry(key, value));
                 }
                 else
                 {
@@ -317,7 +346,7 @@ namespace LocalMarkdownExplorer
                         {
                             if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
                             {
-                                this.lbMdList.Items.Add(new DictionaryEntry(key, value));
+                                listBox.Items.Add(new DictionaryEntry(key, value));
                             }
                         }
                     }
@@ -469,6 +498,8 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
+
+
 
 
     }
