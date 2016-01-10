@@ -392,12 +392,16 @@ namespace LocalMarkdownExplorer
             string[] searchWords = searchWord.Split(' ');
             string[] arrayDir = Directory.GetDirectories(sDir);
 
-            for (int i = 0; i < arrayDir.Length; i++)
+
+            if (searchWord == "")
             {
-                string fullpath = arrayDir[i];
-                string key = fullpath.Replace(sDir, "");
-                object value = new SelectedFile(true, key, fullpath, "");
-                listBox.Items.Add(new DictionaryEntry(key, value));
+                for (int i = 0; i < arrayDir.Length; i++)
+                {
+                    string fullpath = arrayDir[i];
+                    string key = fullpath.Replace(sDir, "");
+                    object value = new SelectedFile(true, key, fullpath, "");
+                    listBox.Items.Add(new DictionaryEntry(key, value));
+                }
             }
             string[] array = Directory.GetFiles(sDir);
             for (int i = 0; i < array.Length; i++)
