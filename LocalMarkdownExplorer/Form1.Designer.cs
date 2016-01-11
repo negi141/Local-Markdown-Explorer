@@ -54,7 +54,6 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -105,7 +104,6 @@
             // 
             // tabText
             // 
-            this.tabText.Controls.Add(this.statusStrip1);
             this.tabText.Controls.Add(this.btnTextAdd_H2);
             this.tabText.Controls.Add(this.btnTextAdd_H1);
             this.tabText.Controls.Add(this.btnTextAdd_Code);
@@ -116,7 +114,7 @@
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
             this.tabText.Size = new System.Drawing.Size(606, 529);
             this.tabText.TabIndex = 0;
-            this.tabText.Text = "　　Text Editor　　";
+            this.tabText.Text = "　　エディター　　";
             this.tabText.UseVisualStyleBackColor = true;
             // 
             // btnTextAdd_H2
@@ -182,7 +180,7 @@
             this.tabMd.Padding = new System.Windows.Forms.Padding(3);
             this.tabMd.Size = new System.Drawing.Size(606, 529);
             this.tabMd.TabIndex = 1;
-            this.tabMd.Text = " MarkdownViewer ";
+            this.tabMd.Text = "プレビュー";
             this.tabMd.UseVisualStyleBackColor = true;
             // 
             // webMd
@@ -202,7 +200,7 @@
             this.tabHTML.Padding = new System.Windows.Forms.Padding(3);
             this.tabHTML.Size = new System.Drawing.Size(606, 529);
             this.tabHTML.TabIndex = 2;
-            this.tabHTML.Text = "　　HTML Output　　";
+            this.tabHTML.Text = "　　HTMLデータ　　";
             this.tabHTML.UseVisualStyleBackColor = true;
             // 
             // tbHTML
@@ -210,13 +208,14 @@
             this.tbHTML.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbHTML.BackColor = System.Drawing.Color.White;
             this.tbHTML.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbHTML.Location = new System.Drawing.Point(6, 6);
             this.tbHTML.Multiline = true;
             this.tbHTML.Name = "tbHTML";
             this.tbHTML.ReadOnly = true;
             this.tbHTML.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbHTML.Size = new System.Drawing.Size(563, 482);
+            this.tbHTML.Size = new System.Drawing.Size(594, 517);
             this.tbHTML.TabIndex = 32;
             // 
             // tbTitle
@@ -362,14 +361,6 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(3, 504);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(600, 22);
-            this.statusStrip1.TabIndex = 36;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -391,7 +382,6 @@
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabEditor.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
-            this.tabText.PerformLayout();
             this.tabMd.ResumeLayout(false);
             this.tabHTML.ResumeLayout(false);
             this.tabHTML.PerformLayout();
@@ -430,7 +420,6 @@
         private System.Windows.Forms.Button btnTextAdd_Code;
         private System.Windows.Forms.Button btnTextAdd_H1;
         private System.Windows.Forms.Button btnTextAdd_H2;
-        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

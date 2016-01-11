@@ -483,10 +483,11 @@ namespace LocalMarkdownExplorer
             hWords.Add("midashi1", new HWord(@"(^# .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 16));// #
             hWords.Add("midashi2", new HWord(@"(^## .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// ##
             hWords.Add("midashi3", new HWord(@"(^###+ .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 12));// ###
-            hWords.Add("code", new HWord(@"(```|^~~~+)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// ``` , ~~~
+            hWords.Add("code", new HWord(@"(```|^~~~+$|^    .+)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// ``` , ~~~ , スペース
             hWords.Add("list", new HWord(@"(^ *\* |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// * , 0.
             hWords.Add("string", new HWord(@"(\*\*.+\*\*)", Color.FromArgb(0, 0, 0), FontStyle.Bold, 12));// **～**
-            hWords.Add("other", new HWord(@"(^>|^\---+)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > , ---
+            hWords.Add("link", new HWord(@"(\[.+\]\(http.+\))", Color.FromArgb(0, 50, 200), FontStyle.Regular, 11));// [～](～)
+            hWords.Add("other", new HWord(@"(^>|^\---+$|^\===+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > , --- , ===
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -507,6 +508,7 @@ namespace LocalMarkdownExplorer
                 rtbMd.SelectionColor = Color.Black;
             }
         }
+
         private void displayMarkDown()
         {
             string content = "";
@@ -516,7 +518,8 @@ namespace LocalMarkdownExplorer
             content = m.Transform(rtbMd.Text);
 
             // チェック用
-            tbHTML.Text = content;
+            content = new Regex("\t").Replace(content,"    ");
+            tbHTML.Text = content.Replace("\n","\r\n");
 
             string html = @"
 <!DOCTYPE html>
@@ -524,71 +527,7 @@ namespace LocalMarkdownExplorer
   <head>
     <meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />
 <style type=""text/css"">
-    body {
-        font-family: helvetica, arial, 'lucida grande', 'hiragino kaku gothic pro',meiryo,'ms pgothic',sans-serif;
-        line-height:26px;
-    }
-    h1 {
-        color: #555;
-        border-bottom: 2px solid #cdf;
-        font-size: 24px;
-        margin-bottom: 12px;
-        padding-bottom: 6px;
-        padding-top: 8px;
-    }
-    h2 {
-        color: #555;
-        border-bottom: 1px solid #cdf;
-        font-size: 20px;
-        margin-bottom: 6px;
-        padding-bottom: 3px;
-        padding-top: 8px;
-    }
-    h3, h4, h5, h6 {
-        color: #555;
-        font-size: 16px;
-        margin-bottom: 12px;
-        padding-bottom: 6px;
-        padding-top: 8px;
-    }
-    code {
-        background:#f0f9ff;
-        border: 1px solid #e0e9ff;
-        white-space : pre;
-        padding:5px;
-        color:#036;
-    }
-    pre {
-        background:#f0f9ff;
-        border: 1px solid #e0e9ff;
-        white-space : pre;
-        padding:5px;
-        border-radius:4px;
-    }
-    pre code {
-        border: 0px solid #e0e9ff;
-        padding:0px;
-    }
-    blockquote {
-        padding: 0px 10px;
-        color: #789;
-        border-left: 4px solid #dde;
-        font-size:80%;
-    }
-    table {
-        border-collapse: collapse;
-    }
-    th {
-        border: solid 1px #ccc;
-        background: #f0f9ff;
-        color:#666;
-    }
-    td {
-        border:solid 1px #ddd;
-    }
-    th, td {
-        padding:4px;
-    }
+    " + Resource1.default_css + @"
 </style>
   </head>
   <body>

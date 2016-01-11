@@ -61,6 +61,37 @@ namespace LocalMarkdownExplorer {
         }
         
         /// <summary>
+        ///   body {
+        ///    font-family: helvetica, arial, &apos;lucida grande&apos;, &apos;hiragino kaku gothic pro&apos;,meiryo,&apos;ms pgothic&apos;,sans-serif;
+        ///    line-height:26px;
+        ///}
+        ///h1 {
+        ///    color: #555;
+        ///    border-bottom: 2px solid #cdf;
+        ///    font-size: 24px;
+        ///    margin-bottom: 12px;
+        ///    padding-bottom: 6px;
+        ///    padding-top: 8px;
+        ///}
+        ///h2 {
+        ///    color: #555;
+        ///    border-bottom: 1px solid #cdf;
+        ///    font-size: 20px;
+        ///    margin-bottom: 6px;
+        ///    padding-bottom: 3px;
+        ///    padding-top: 8px;
+        ///}
+        ///h3, h4, h5, h6 {
+        ///    color: #555;
+        ///    font-si [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string default_css {
+            get {
+                return ResourceManager.GetString("default_css", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Bitmap delete16 {
