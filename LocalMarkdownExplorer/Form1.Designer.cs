@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
+            this.btnHighLight = new System.Windows.Forms.Button();
             this.rtbMd = new System.Windows.Forms.RichTextBox();
             this.tabMd = new System.Windows.Forms.TabPage();
             this.webMd = new System.Windows.Forms.WebBrowser();
@@ -46,32 +46,28 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.lbAssist = new System.Windows.Forms.ListBox();
+            this.linkBack = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.linkBack = new System.Windows.Forms.LinkLabel();
+            this.btnTextAdd_Code = new System.Windows.Forms.Button();
+            this.btnTextAdd_H1 = new System.Windows.Forms.Button();
+            this.btnTextAdd_H2 = new System.Windows.Forms.Button();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
             this.tabHTML.SuspendLayout();
             this.groupBoxFile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "検索";
             // 
             // tbSearch
             // 
             this.tbSearch.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbSearch.Location = new System.Drawing.Point(48, 46);
+            this.tbSearch.Location = new System.Drawing.Point(43, 46);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(232, 23);
+            this.tbSearch.Size = new System.Drawing.Size(242, 23);
             this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
@@ -108,6 +104,10 @@
             // 
             // tabText
             // 
+            this.tabText.Controls.Add(this.btnTextAdd_H2);
+            this.tabText.Controls.Add(this.btnTextAdd_H1);
+            this.tabText.Controls.Add(this.btnTextAdd_Code);
+            this.tabText.Controls.Add(this.btnHighLight);
             this.tabText.Controls.Add(this.rtbMd);
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
@@ -117,14 +117,26 @@
             this.tabText.Text = "　　Text Editor　　";
             this.tabText.UseVisualStyleBackColor = true;
             // 
+            // btnHighLight
+            // 
+            this.btnHighLight.Location = new System.Drawing.Point(7, 4);
+            this.btnHighLight.Name = "btnHighLight";
+            this.btnHighLight.Size = new System.Drawing.Size(87, 23);
+            this.btnHighLight.TabIndex = 32;
+            this.btnHighLight.Text = "ハイライト更新";
+            this.btnHighLight.UseVisualStyleBackColor = true;
+            this.btnHighLight.Click += new System.EventHandler(this.btnHighLight_Click);
+            // 
             // rtbMd
             // 
+            this.rtbMd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbMd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbMd.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbMd.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rtbMd.Location = new System.Drawing.Point(3, 6);
+            this.rtbMd.Location = new System.Drawing.Point(3, 29);
             this.rtbMd.Name = "rtbMd";
-            this.rtbMd.Size = new System.Drawing.Size(600, 520);
+            this.rtbMd.Size = new System.Drawing.Size(600, 497);
             this.rtbMd.TabIndex = 31;
             this.rtbMd.Text = "";
             this.rtbMd.WordWrap = false;
@@ -215,7 +227,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.DeleteHS;
+            this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.delete16;
             this.btnDelete.Location = new System.Drawing.Point(505, 21);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(56, 26);
@@ -261,9 +273,30 @@
             this.lbAssist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAssist_KeyDown);
             this.lbAssist.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbAssist_MouseUp);
             // 
+            // linkBack
+            // 
+            this.linkBack.AutoSize = true;
+            this.linkBack.Location = new System.Drawing.Point(15, 73);
+            this.linkBack.Name = "linkBack";
+            this.linkBack.Size = new System.Drawing.Size(38, 12);
+            this.linkBack.TabIndex = 55;
+            this.linkBack.TabStop = true;
+            this.linkBack.Text = "＜戻る";
+            this.linkBack.Visible = false;
+            this.linkBack.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBack_LinkClicked);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::LocalMarkdownExplorer.Resource1.search;
+            this.pictureBox1.Location = new System.Drawing.Point(20, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.TabIndex = 56;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnSetting
             // 
-            this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.properties_16xMD;
+            this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.settings_16;
             this.btnSetting.Location = new System.Drawing.Point(12, 12);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(58, 26);
@@ -297,29 +330,47 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // linkBack
+            // btnTextAdd_Code
             // 
-            this.linkBack.AutoSize = true;
-            this.linkBack.Location = new System.Drawing.Point(15, 73);
-            this.linkBack.Name = "linkBack";
-            this.linkBack.Size = new System.Drawing.Size(38, 12);
-            this.linkBack.TabIndex = 55;
-            this.linkBack.TabStop = true;
-            this.linkBack.Text = "＜戻る";
-            this.linkBack.Visible = false;
-            this.linkBack.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBack_LinkClicked);
+            this.btnTextAdd_Code.Location = new System.Drawing.Point(178, 4);
+            this.btnTextAdd_Code.Name = "btnTextAdd_Code";
+            this.btnTextAdd_Code.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_Code.TabIndex = 33;
+            this.btnTextAdd_Code.Text = "~~~~";
+            this.btnTextAdd_Code.UseVisualStyleBackColor = true;
+            this.btnTextAdd_Code.Click += new System.EventHandler(this.btnTextAdd_Code_Click);
+            // 
+            // btnTextAdd_H1
+            // 
+            this.btnTextAdd_H1.Location = new System.Drawing.Point(100, 4);
+            this.btnTextAdd_H1.Name = "btnTextAdd_H1";
+            this.btnTextAdd_H1.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_H1.TabIndex = 34;
+            this.btnTextAdd_H1.Text = "#";
+            this.btnTextAdd_H1.UseVisualStyleBackColor = true;
+            this.btnTextAdd_H1.Click += new System.EventHandler(this.btnTextAdd_H1_Click);
+            // 
+            // btnTextAdd_H2
+            // 
+            this.btnTextAdd_H2.Location = new System.Drawing.Point(139, 4);
+            this.btnTextAdd_H2.Name = "btnTextAdd_H2";
+            this.btnTextAdd_H2.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_H2.TabIndex = 35;
+            this.btnTextAdd_H2.Text = "##";
+            this.btnTextAdd_H2.UseVisualStyleBackColor = true;
+            this.btnTextAdd_H2.Click += new System.EventHandler(this.btnTextAdd_H2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkBack);
             this.Controls.Add(this.lbAssist);
             this.Controls.Add(this.groupBoxFile);
             this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.btnOpenDir);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lbMdList);
@@ -335,6 +386,7 @@
             this.tabHTML.PerformLayout();
             this.groupBoxFile.ResumeLayout(false);
             this.groupBoxFile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,7 +394,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ListBox lbMdList;
@@ -363,6 +414,11 @@
         private System.Windows.Forms.ListBox lbAssist;
         private System.Windows.Forms.LinkLabel linkBack;
         private System.Windows.Forms.RichTextBox rtbMd;
+        private System.Windows.Forms.Button btnHighLight;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnTextAdd_Code;
+        private System.Windows.Forms.Button btnTextAdd_H1;
+        private System.Windows.Forms.Button btnTextAdd_H2;
     }
 }
 

@@ -63,9 +63,9 @@ namespace LocalMarkdownExplorer {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap DeleteHS {
+        internal static System.Drawing.Bitmap delete16 {
             get {
-                object obj = ResourceManager.GetObject("DeleteHS", resourceCulture);
+                object obj = ResourceManager.GetObject("delete16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,16 +113,6 @@ namespace LocalMarkdownExplorer {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap properties_16xMD {
-            get {
-                object obj = ResourceManager.GetObject("properties_16xMD", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
-        /// </summary>
         internal static System.Drawing.Bitmap RightToLeftDoucmentHS {
             get {
                 object obj = ResourceManager.GetObject("RightToLeftDoucmentHS", resourceCulture);
@@ -136,6 +126,26 @@ namespace LocalMarkdownExplorer {
         internal static System.Drawing.Bitmap saveHS {
             get {
                 object obj = ResourceManager.GetObject("saveHS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap search {
+            get {
+                object obj = ResourceManager.GetObject("search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_16 {
+            get {
+                object obj = ResourceManager.GetObject("settings_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

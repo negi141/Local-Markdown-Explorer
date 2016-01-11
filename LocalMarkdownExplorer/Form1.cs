@@ -194,18 +194,37 @@ namespace LocalMarkdownExplorer
             initLoad();
             linkBack.Visible = false;
         }
+        private void btnHighLight_Click(object sender, EventArgs e)
+        {
+            highLight();
+        }
+
+        private void btnTextAdd_Code_Click(object sender, EventArgs e)
+        {
+            textAdd("~~~~~~~~~~~~~~~~");
+        }
+
+        private void btnTextAdd_H1_Click(object sender, EventArgs e)
+        {
+            textAdd("# "); 
+        }
+
+        private void btnTextAdd_H2_Click(object sender, EventArgs e)
+        {
+            textAdd("## ");
+        }
         #endregion
 
 
         #region 選択イベントメソッド============================================================
-
-
+        
         private void lbAssist_MouseUp(object sender, MouseEventArgs e)
         {
             lbAssist.Visible = false;
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
             this.lbMdList.Text = dictionaryEntry.Key.ToString();
         }
+
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFile = getSelectedItem();
@@ -222,9 +241,8 @@ namespace LocalMarkdownExplorer
             else
             {
                 this.groupBoxFile.Enabled = true;
+                this.rtbMd.ScrollToCaret();
                 openSelectFile();
-                rtbMd.Select(0, rtbMd.Text.Length);
-                rtbMd.SelectionColor = Color.Black;
                 highLight();
                 lbCautionMessge.Visible = false;
                 try
@@ -333,33 +351,20 @@ namespace LocalMarkdownExplorer
         {
             if (this.isFirstLoad == false) lbCautionMessge.Visible = true;
         }
-        private void highLight()
-        {
-            string tokens = @"(^#* |^~*)";
-            Regex rex = new Regex(tokens);
 
-            string[] lines = new Regex("\n").Split(rtbMd.Text);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                int StartCursorPosition = rtbMd.SelectionStart;
-                MatchCollection mc = rex.Matches(lines[i]);
-                foreach (Match m in mc)
-                {
-                    int startIndex = rtbMd.GetFirstCharIndexFromLine(i) + m.Groups[1].Index;
-                    int StopIndex = m.Groups[1].Length;
-                    rtbMd.Select(startIndex, StopIndex);
-                    rtbMd.SelectionColor = Color.Blue;
-
-                    rtbMd.Select(StartCursorPosition, 0);
-                    rtbMd.SelectionColor = Color.Black;
-                }
-            }
-        }
         #endregion
 
 
         #region 汎用メソッド============================================================
+        private void textAdd(string addText)
+        {
+            int index = rtbMd.SelectionStart;
+            if (rtbMd.SelectedText.Length == 0)
+                rtbMd.SelectedText = addText;
+            highLight();
+            rtbMd.Select(index+addText.Length, 0);
+            rtbMd.Focus();
+        }
 
         private void InitViewListBox()
         {
@@ -465,6 +470,40 @@ namespace LocalMarkdownExplorer
             return file;
         }
 
+        private void highLight()
+        {
+            rtbMd.Select(0, rtbMd.Text.Length);
+            rtbMd.SelectionColor = Color.Black;
+            string defaultFont = "MS UI Gothic";
+            rtbMd.SelectionFont = new Font(defaultFont, 12, FontStyle.Regular);
+
+            string[] lines = rtbMd.Lines;
+            
+            Dictionary<string, HWord> hWords = new Dictionary<string, HWord>();
+            hWords.Add("midashi", new HWord(@"(^#+ .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// 見出し
+            hWords.Add("code", new HWord(@"(```|^~*)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// コード
+            hWords.Add("list", new HWord(@"(^ *\* |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// リスト
+            hWords.Add("other", new HWord(@"(^>|^\-*|\*+)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// その他
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                int StartCursorPosition = rtbMd.SelectionStart;
+                foreach (var hword in hWords)
+                {
+                    MatchCollection mc = new Regex(hword.Value.token).Matches(lines[i]);
+                    foreach (Match m in mc)
+                    {
+                        int startIndex = rtbMd.GetFirstCharIndexFromLine(i) + m.Groups[1].Index;
+                        int StopIndex = m.Groups[1].Length;
+                        rtbMd.Select(startIndex, StopIndex);
+                        rtbMd.SelectionColor = hword.Value.color;
+                        rtbMd.SelectionFont = new Font(defaultFont, hword.Value.fontSize, hword.Value.fontStyle);
+                    }
+                }
+                rtbMd.Select(StartCursorPosition, 0);
+                rtbMd.SelectionColor = Color.Black;
+            }
+        }
         private void displayMarkDown()
         {
             string content = "";
@@ -577,9 +616,6 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
-
-
-
 
     }
 }

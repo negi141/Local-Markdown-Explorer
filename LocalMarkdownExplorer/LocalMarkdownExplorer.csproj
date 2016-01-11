@@ -65,6 +65,7 @@
     <Compile Include="FormSetting.Designer.cs">
       <DependentUpon>FormSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="HWord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
@@ -105,14 +106,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <None Include="Resources\delete16.png" />
+    <None Include="Resources\settings_16.png" />
+    <None Include="Resources\search.png" />
     <None Include="Resources\Folder_16x16.png" />
     <None Include="Resources\RightToLeftDoucmentHS1.png" />
-    <None Include="Resources\DeleteHS.png" />
     <None Include="Resources\RightToLeftDoucmentHS.png" />
     <None Include="Resources\saveHS.png" />
     <None Include="Resources\FolderOpen_16x16_72.png" />
     <None Include="Resources\NewDocumentHS.png" />
-    <None Include="Resources\properties_16xMD.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
