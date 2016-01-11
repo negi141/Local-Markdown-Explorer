@@ -33,6 +33,9 @@
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
+            this.btnTextAdd_H2 = new System.Windows.Forms.Button();
+            this.btnTextAdd_H1 = new System.Windows.Forms.Button();
+            this.btnTextAdd_Code = new System.Windows.Forms.Button();
             this.btnHighLight = new System.Windows.Forms.Button();
             this.rtbMd = new System.Windows.Forms.RichTextBox();
             this.tabMd = new System.Windows.Forms.TabPage();
@@ -51,9 +54,7 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnTextAdd_Code = new System.Windows.Forms.Button();
-            this.btnTextAdd_H1 = new System.Windows.Forms.Button();
-            this.btnTextAdd_H2 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -104,6 +105,7 @@
             // 
             // tabText
             // 
+            this.tabText.Controls.Add(this.statusStrip1);
             this.tabText.Controls.Add(this.btnTextAdd_H2);
             this.tabText.Controls.Add(this.btnTextAdd_H1);
             this.tabText.Controls.Add(this.btnTextAdd_Code);
@@ -116,6 +118,36 @@
             this.tabText.TabIndex = 0;
             this.tabText.Text = "　　Text Editor　　";
             this.tabText.UseVisualStyleBackColor = true;
+            // 
+            // btnTextAdd_H2
+            // 
+            this.btnTextAdd_H2.Location = new System.Drawing.Point(139, 4);
+            this.btnTextAdd_H2.Name = "btnTextAdd_H2";
+            this.btnTextAdd_H2.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_H2.TabIndex = 35;
+            this.btnTextAdd_H2.Text = "##";
+            this.btnTextAdd_H2.UseVisualStyleBackColor = true;
+            this.btnTextAdd_H2.Click += new System.EventHandler(this.btnTextAdd_H2_Click);
+            // 
+            // btnTextAdd_H1
+            // 
+            this.btnTextAdd_H1.Location = new System.Drawing.Point(100, 4);
+            this.btnTextAdd_H1.Name = "btnTextAdd_H1";
+            this.btnTextAdd_H1.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_H1.TabIndex = 34;
+            this.btnTextAdd_H1.Text = "#";
+            this.btnTextAdd_H1.UseVisualStyleBackColor = true;
+            this.btnTextAdd_H1.Click += new System.EventHandler(this.btnTextAdd_H1_Click);
+            // 
+            // btnTextAdd_Code
+            // 
+            this.btnTextAdd_Code.Location = new System.Drawing.Point(178, 4);
+            this.btnTextAdd_Code.Name = "btnTextAdd_Code";
+            this.btnTextAdd_Code.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_Code.TabIndex = 33;
+            this.btnTextAdd_Code.Text = "~~~~";
+            this.btnTextAdd_Code.UseVisualStyleBackColor = true;
+            this.btnTextAdd_Code.Click += new System.EventHandler(this.btnTextAdd_Code_Click);
             // 
             // btnHighLight
             // 
@@ -330,35 +362,13 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnTextAdd_Code
+            // statusStrip1
             // 
-            this.btnTextAdd_Code.Location = new System.Drawing.Point(178, 4);
-            this.btnTextAdd_Code.Name = "btnTextAdd_Code";
-            this.btnTextAdd_Code.Size = new System.Drawing.Size(33, 23);
-            this.btnTextAdd_Code.TabIndex = 33;
-            this.btnTextAdd_Code.Text = "~~~~";
-            this.btnTextAdd_Code.UseVisualStyleBackColor = true;
-            this.btnTextAdd_Code.Click += new System.EventHandler(this.btnTextAdd_Code_Click);
-            // 
-            // btnTextAdd_H1
-            // 
-            this.btnTextAdd_H1.Location = new System.Drawing.Point(100, 4);
-            this.btnTextAdd_H1.Name = "btnTextAdd_H1";
-            this.btnTextAdd_H1.Size = new System.Drawing.Size(33, 23);
-            this.btnTextAdd_H1.TabIndex = 34;
-            this.btnTextAdd_H1.Text = "#";
-            this.btnTextAdd_H1.UseVisualStyleBackColor = true;
-            this.btnTextAdd_H1.Click += new System.EventHandler(this.btnTextAdd_H1_Click);
-            // 
-            // btnTextAdd_H2
-            // 
-            this.btnTextAdd_H2.Location = new System.Drawing.Point(139, 4);
-            this.btnTextAdd_H2.Name = "btnTextAdd_H2";
-            this.btnTextAdd_H2.Size = new System.Drawing.Size(33, 23);
-            this.btnTextAdd_H2.TabIndex = 35;
-            this.btnTextAdd_H2.Text = "##";
-            this.btnTextAdd_H2.UseVisualStyleBackColor = true;
-            this.btnTextAdd_H2.Click += new System.EventHandler(this.btnTextAdd_H2_Click);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 504);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(600, 22);
+            this.statusStrip1.TabIndex = 36;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
@@ -381,6 +391,7 @@
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabEditor.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
+            this.tabText.PerformLayout();
             this.tabMd.ResumeLayout(false);
             this.tabHTML.ResumeLayout(false);
             this.tabHTML.PerformLayout();
@@ -419,6 +430,7 @@
         private System.Windows.Forms.Button btnTextAdd_Code;
         private System.Windows.Forms.Button btnTextAdd_H1;
         private System.Windows.Forms.Button btnTextAdd_H2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

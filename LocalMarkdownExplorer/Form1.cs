@@ -478,12 +478,15 @@ namespace LocalMarkdownExplorer
             rtbMd.SelectionFont = new Font(defaultFont, 12, FontStyle.Regular);
 
             string[] lines = rtbMd.Lines;
-            
+
             Dictionary<string, HWord> hWords = new Dictionary<string, HWord>();
-            hWords.Add("midashi", new HWord(@"(^#+ .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// 見出し
-            hWords.Add("code", new HWord(@"(```|^~*)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// コード
-            hWords.Add("list", new HWord(@"(^ *\* |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// リスト
-            hWords.Add("other", new HWord(@"(^>|^\-*|\*+)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// その他
+            hWords.Add("midashi1", new HWord(@"(^# .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 16));// #
+            hWords.Add("midashi2", new HWord(@"(^## .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// ##
+            hWords.Add("midashi3", new HWord(@"(^###+ .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 12));// ###
+            hWords.Add("code", new HWord(@"(```|^~~~+)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// ``` , ~~~
+            hWords.Add("list", new HWord(@"(^ *\* |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// * , 0.
+            hWords.Add("string", new HWord(@"(\*\*.+\*\*)", Color.FromArgb(0, 0, 0), FontStyle.Bold, 12));// **～**
+            hWords.Add("other", new HWord(@"(^>|^\---+)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > , ---
 
             for (int i = 0; i < lines.Length; i++)
             {
