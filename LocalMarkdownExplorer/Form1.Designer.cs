@@ -104,6 +104,7 @@
             // 
             // tabText
             // 
+            this.tabText.BackColor = System.Drawing.Color.LightGray;
             this.tabText.Controls.Add(this.btnTextAdd_H2);
             this.tabText.Controls.Add(this.btnTextAdd_H1);
             this.tabText.Controls.Add(this.btnTextAdd_Code);
@@ -115,7 +116,6 @@
             this.tabText.Size = new System.Drawing.Size(606, 529);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "　　エディター　　";
-            this.tabText.UseVisualStyleBackColor = true;
             // 
             // btnTextAdd_H2
             // 
@@ -174,6 +174,7 @@
             // 
             // tabMd
             // 
+            this.tabMd.BackColor = System.Drawing.Color.Gainsboro;
             this.tabMd.Controls.Add(this.webMd);
             this.tabMd.Location = new System.Drawing.Point(4, 22);
             this.tabMd.Name = "tabMd";
@@ -181,7 +182,6 @@
             this.tabMd.Size = new System.Drawing.Size(606, 529);
             this.tabMd.TabIndex = 1;
             this.tabMd.Text = "プレビュー";
-            this.tabMd.UseVisualStyleBackColor = true;
             // 
             // webMd
             // 
@@ -194,6 +194,7 @@
             // 
             // tabHTML
             // 
+            this.tabHTML.BackColor = System.Drawing.Color.Gainsboro;
             this.tabHTML.Controls.Add(this.tbHTML);
             this.tabHTML.Location = new System.Drawing.Point(4, 22);
             this.tabHTML.Name = "tabHTML";
@@ -201,7 +202,6 @@
             this.tabHTML.Size = new System.Drawing.Size(606, 529);
             this.tabHTML.TabIndex = 2;
             this.tabHTML.Text = "　　HTMLデータ　　";
-            this.tabHTML.UseVisualStyleBackColor = true;
             // 
             // tbHTML
             // 

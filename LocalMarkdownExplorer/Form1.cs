@@ -79,8 +79,6 @@ namespace LocalMarkdownExplorer
 
                 this.InitViewListBox();
 
-                this.tabEditor.SelectedIndex = 1;
-
                 this.groupBoxFile.Enabled = false;
 
                 this.isFirstLoad = false;
@@ -482,13 +480,14 @@ namespace LocalMarkdownExplorer
             hWords.Add("midashi1", new HWord(@"(^#.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 16));// #
             hWords.Add("midashi2", new HWord(@"(^##.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// ##
             hWords.Add("midashi3", new HWord(@"(^###+.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 12));// ###
-            hWords.Add("code", new HWord(@"(```|^~~~+$|^    .+)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// ``` , ~~~ , スペース
+            hWords.Add("code", new HWord(@"(```|^~~~+$|^    [^\*\-]+|`[^`]+`)", Color.FromArgb(0, 120, 20), FontStyle.Regular, 11));// ``` , ~~~ , スペース
             hWords.Add("list", new HWord(@"(^ *\* |^ *\- |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// * , 0. , -
             hWords.Add("string", new HWord(@"(\*\*.+\*\*)", Color.FromArgb(0, 0, 0), FontStyle.Bold, 12));// **～**
-            hWords.Add("link", new HWord(@"(\[.+\]\(.+\))", Color.FromArgb(0, 50, 200), FontStyle.Regular, 11));// [～](～)
+            hWords.Add("link", new HWord(@"(\[.+\]\(.+\)|\[[0-9]+\])", Color.FromArgb(0, 50, 200), FontStyle.Regular, 11));// [～](～) , [1]
             hWords.Add("border1", new HWord(@"(^\===+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// ===
             hWords.Add("border2", new HWord(@"(^\---+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// ---
             hWords.Add("other", new HWord(@"(^>)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > 
+            hWords.Add("table", new HWord(@"(^\|.+\|$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// |～～|
 
             for (int i = 0; i < lines.Length; i++)
             {
