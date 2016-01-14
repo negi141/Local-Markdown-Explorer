@@ -474,20 +474,21 @@ namespace LocalMarkdownExplorer
         {
             rtbMd.Select(0, rtbMd.Text.Length);
             rtbMd.SelectionColor = Color.Black;
-            string defaultFont = "MS UI Gothic";
-            rtbMd.SelectionFont = new Font(defaultFont, 12, FontStyle.Regular);
+            rtbMd.SelectionFont = new Font("MS UI Gothic", 12, FontStyle.Regular);
 
             string[] lines = rtbMd.Lines;
 
             Dictionary<string, HWord> hWords = new Dictionary<string, HWord>();
-            hWords.Add("midashi1", new HWord(@"(^# .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 16));// #
-            hWords.Add("midashi2", new HWord(@"(^## .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// ##
-            hWords.Add("midashi3", new HWord(@"(^###+ .*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 12));// ###
+            hWords.Add("midashi1", new HWord(@"(^#.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 16));// #
+            hWords.Add("midashi2", new HWord(@"(^##.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 14));// ##
+            hWords.Add("midashi3", new HWord(@"(^###+.*)", Color.FromArgb(0, 50, 150), FontStyle.Bold, 12));// ###
             hWords.Add("code", new HWord(@"(```|^~~~+$|^    .+)", Color.FromArgb(0, 150, 50), FontStyle.Regular, 11));// ``` , ~~~ , スペース
-            hWords.Add("list", new HWord(@"(^ *\* |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// * , 0.
+            hWords.Add("list", new HWord(@"(^ *\* |^ *\- |[0-9]+\. )", Color.FromArgb(150, 50, 0), FontStyle.Regular, 11));// * , 0. , -
             hWords.Add("string", new HWord(@"(\*\*.+\*\*)", Color.FromArgb(0, 0, 0), FontStyle.Bold, 12));// **～**
-            hWords.Add("link", new HWord(@"(\[.+\]\(http.+\))", Color.FromArgb(0, 50, 200), FontStyle.Regular, 11));// [～](～)
-            hWords.Add("other", new HWord(@"(^>|^\---+$|^\===+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > , --- , ===
+            hWords.Add("link", new HWord(@"(\[.+\]\(.+\))", Color.FromArgb(0, 50, 200), FontStyle.Regular, 11));// [～](～)
+            hWords.Add("border1", new HWord(@"(^\===+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// ===
+            hWords.Add("border2", new HWord(@"(^\---+$)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// ---
+            hWords.Add("other", new HWord(@"(^>)", Color.FromArgb(0, 150, 150), FontStyle.Regular, 11));// > 
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -498,15 +499,35 @@ namespace LocalMarkdownExplorer
                     foreach (Match m in mc)
                     {
                         int startIndex = rtbMd.GetFirstCharIndexFromLine(i) + m.Groups[1].Index;
-                        int StopIndex = m.Groups[1].Length;
-                        rtbMd.Select(startIndex, StopIndex);
-                        rtbMd.SelectionColor = hword.Value.color;
-                        rtbMd.SelectionFont = new Font(defaultFont, hword.Value.fontSize, hword.Value.fontStyle);
+                        int length = m.Groups[1].Length;
+                        SetTextStyle(startIndex, length, hword.Value);
+                        if (i > 0 && lines[i-1] != "")
+                        {
+                            if (hword.Key == "border1")
+                            {
+                                startIndex = rtbMd.GetFirstCharIndexFromLine(i - 1);
+                                length = lines[i - 1].Length;
+                                SetTextStyle(startIndex, length, hWords["midashi1"]);
+                            }
+                            if (hword.Key == "border2")
+                            {
+                                startIndex = rtbMd.GetFirstCharIndexFromLine(i - 1);
+                                length = lines[i - 1].Length;
+                                SetTextStyle(startIndex, length, hWords["midashi2"]);
+                            }
+                        }
                     }
                 }
                 rtbMd.Select(StartCursorPosition, 0);
                 rtbMd.SelectionColor = Color.Black;
             }
+        }
+
+        private void SetTextStyle(int startIndex, int length, HWord Style)
+        {
+            rtbMd.Select(startIndex, length);
+            rtbMd.SelectionColor = Style.color;
+            rtbMd.SelectionFont = new Font("MS UI Gothic", Style.fontSize, Style.fontStyle);
         }
 
         private void displayMarkDown()
