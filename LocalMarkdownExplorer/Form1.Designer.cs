@@ -54,6 +54,8 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnTextAdd_Li1 = new System.Windows.Forms.Button();
+            this.btnTextAdd_LI2 = new System.Windows.Forms.Button();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -105,6 +107,8 @@
             // tabText
             // 
             this.tabText.BackColor = System.Drawing.Color.LightGray;
+            this.tabText.Controls.Add(this.btnTextAdd_LI2);
+            this.tabText.Controls.Add(this.btnTextAdd_Li1);
             this.tabText.Controls.Add(this.btnTextAdd_H2);
             this.tabText.Controls.Add(this.btnTextAdd_H1);
             this.tabText.Controls.Add(this.btnTextAdd_Code);
@@ -361,6 +365,26 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnTextAdd_Li1
+            // 
+            this.btnTextAdd_Li1.Location = new System.Drawing.Point(217, 4);
+            this.btnTextAdd_Li1.Name = "btnTextAdd_Li1";
+            this.btnTextAdd_Li1.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_Li1.TabIndex = 36;
+            this.btnTextAdd_Li1.Text = "-  ";
+            this.btnTextAdd_Li1.UseVisualStyleBackColor = true;
+            this.btnTextAdd_Li1.Click += new System.EventHandler(this.btnTextAdd_Li1_Click);
+            // 
+            // btnTextAdd_LI2
+            // 
+            this.btnTextAdd_LI2.Location = new System.Drawing.Point(256, 4);
+            this.btnTextAdd_LI2.Name = "btnTextAdd_LI2";
+            this.btnTextAdd_LI2.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_LI2.TabIndex = 37;
+            this.btnTextAdd_LI2.Text = "   -";
+            this.btnTextAdd_LI2.UseVisualStyleBackColor = true;
+            this.btnTextAdd_LI2.Click += new System.EventHandler(this.btnTextAdd_LI2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -420,6 +444,8 @@
         private System.Windows.Forms.Button btnTextAdd_Code;
         private System.Windows.Forms.Button btnTextAdd_H1;
         private System.Windows.Forms.Button btnTextAdd_H2;
+        private System.Windows.Forms.Button btnTextAdd_LI2;
+        private System.Windows.Forms.Button btnTextAdd_Li1;
     }
 }
 
