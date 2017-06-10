@@ -12,9 +12,6 @@ LocalMarkdownExplorerは、ローカルのMarkdownファイル用のエクスプ
     * 一覧表示させるディレクトリを、絶対パスではなく相対パスでも指定できるようにしているため、このソフトウェア自体をMarkdownファイルと一緒にGit等で共有すれば、そのままビューワーとして利用させることができます。
     * ソフトウェアのデータサイズが小さく・ファイル数も少ないため、配布が容易です。
 
-## 画面
-![](http://daybreak3d.nobody.jp/image/tmp/ss04.png)
-
 ## 利用
 [LocalMarkdownExplorer.zip](https://github.com/negi141/LocalMarkdownExplorer/raw/master/bin/LocalMarkdownExplorer.zip)
 
@@ -31,3 +28,7 @@ Visual Studio 2010 (C#)
 > http://www.apache.org/licenses/LICENSE-2.0
 > 
 > Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+#### DynamicJson
+> http://dynamicjson.codeplex.com/
+> Licensed under the Microsoft Public License(Ms-PL)
