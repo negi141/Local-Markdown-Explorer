@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace LocalMarkdownExplorer
+namespace negi
 {
     public class Util
     {
@@ -26,6 +26,18 @@ namespace LocalMarkdownExplorer
                 return str;
             }
 
+            public static string GetFileReadToEnd(string filename)
+            {
+                var filename_fullpath = Util.Path.GetLocalPath() + filename;
+                var enc = Encoding.GetEncoding("UTF-8");
+                if (!File.Exists(filename_fullpath))
+                {
+                    StreamWriter sw = new StreamWriter(filename_fullpath, false, enc);
+                    sw.Close();
+                }
+                return GetFileReadToEnd(filename, enc);
+            }
+
             public static void SaveFile(string filePath, string content, Encoding enc)
             {
                 try
@@ -39,6 +51,12 @@ namespace LocalMarkdownExplorer
                 {
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                 }
+            }
+
+            public static void SaveFile(string filePath, string content)
+            {
+                var filename_fullpath = Util.Path.GetLocalPath() + filePath;
+                SaveFile(filename_fullpath, content, Encoding.GetEncoding("UTF-8"));
             }
 
             public static void ProcessStart(string path)
@@ -83,65 +101,6 @@ namespace LocalMarkdownExplorer
             }
         }
 
-        public class IniFile
-        {
-            private string filename_fullpath;
-            private Encoding enc;
-
-            public Dictionary<string, string> data = new System.Collections.Generic.Dictionary<string, string>();
-
-            public IniFile(string filename)
-            {
-                this.filename_fullpath = Util.Path.GetLocalPath() + filename;
-                this.enc = Encoding.GetEncoding("UTF-8");
-                if (!File.Exists(filename_fullpath))
-                {
-                    StreamWriter sw = new StreamWriter(this.filename_fullpath, false, this.enc);
-                    sw.WriteLine();
-                    sw.Close();
-                }
-                Read();
-            }
-
-            private void Read()
-            {
-                string txt = "";
-                try
-                {
-                    StreamReader sr = new StreamReader(this.filename_fullpath, this.enc);
-                    txt = sr.ReadToEnd();
-                    sr.Close();
-                }
-                catch
-                {
-
-                }
-                string[] a = txt.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                foreach (string b in a)
-                {
-                    string[] c = b.Split(']');
-                    if (c.Length == 2)
-                        this.data.Add(c[0].Replace("[", ""), c[1]);
-                }
-            }
-
-            public string Data(string key)
-            {
-                return (this.data.ContainsKey(key)) ? this.data[key] : "";
-            }
-
-            public void Save()
-            {
-                StreamWriter sw = new StreamWriter(this.filename_fullpath, false, this.enc);
-                foreach (var d in this.data)
-                {
-                    sw.WriteLine("[" + d.Key + "]" + d.Value);
-                }
-                sw.Close();
-            }
-
-        }
-
         public class Path
         {
             // アプリケーションのパスを返す
@@ -155,6 +114,35 @@ namespace LocalMarkdownExplorer
                 string[] pathArr = path.Split('\\');
                 string lastDir = pathArr[pathArr.Length - 2];
                 return lastDir;
+            }
+
+        }
+
+        public class Validate
+        {
+            public static bool TextBox(System.Windows.Forms.TextBox control, string label)
+            {
+                if (control.Text == "")
+                {
+                    System.Windows.Forms.MessageBox.Show(label + "を入力してください");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            public static bool DirectoryExists(string path, string label)
+            {
+                if (!Directory.Exists(path))
+                {
+                    System.Windows.Forms.MessageBox.Show("パス：" + path + "が存在しません");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
 
         }

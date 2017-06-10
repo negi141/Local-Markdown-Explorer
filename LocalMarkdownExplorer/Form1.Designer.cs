@@ -33,6 +33,8 @@
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
+            this.btnTextAdd_LI2 = new System.Windows.Forms.Button();
+            this.btnTextAdd_Li1 = new System.Windows.Forms.Button();
             this.btnTextAdd_H2 = new System.Windows.Forms.Button();
             this.btnTextAdd_H1 = new System.Windows.Forms.Button();
             this.btnTextAdd_Code = new System.Windows.Forms.Button();
@@ -54,8 +56,8 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnTextAdd_Li1 = new System.Windows.Forms.Button();
-            this.btnTextAdd_LI2 = new System.Windows.Forms.Button();
+            this.cbRootDir = new System.Windows.Forms.ComboBox();
+            this.btnAddRootDir = new System.Windows.Forms.Button();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -67,7 +69,7 @@
             // tbSearch
             // 
             this.tbSearch.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbSearch.Location = new System.Drawing.Point(43, 46);
+            this.tbSearch.Location = new System.Drawing.Point(40, 75);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(242, 23);
             this.tbSearch.TabIndex = 20;
@@ -82,9 +84,9 @@
             this.lbMdList.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbMdList.FormattingEnabled = true;
             this.lbMdList.ItemHeight = 16;
-            this.lbMdList.Location = new System.Drawing.Point(12, 86);
+            this.lbMdList.Location = new System.Drawing.Point(12, 118);
             this.lbMdList.Name = "lbMdList";
-            this.lbMdList.Size = new System.Drawing.Size(287, 532);
+            this.lbMdList.Size = new System.Drawing.Size(287, 500);
             this.lbMdList.TabIndex = 25;
             this.lbMdList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbMdList_DrawItem);
             this.lbMdList.SelectedIndexChanged += new System.EventHandler(this.lbMdList_SelectedIndexChanged);
@@ -120,6 +122,26 @@
             this.tabText.Size = new System.Drawing.Size(606, 529);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "　　エディター　　";
+            // 
+            // btnTextAdd_LI2
+            // 
+            this.btnTextAdd_LI2.Location = new System.Drawing.Point(256, 4);
+            this.btnTextAdd_LI2.Name = "btnTextAdd_LI2";
+            this.btnTextAdd_LI2.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_LI2.TabIndex = 37;
+            this.btnTextAdd_LI2.Text = "   -";
+            this.btnTextAdd_LI2.UseVisualStyleBackColor = true;
+            this.btnTextAdd_LI2.Click += new System.EventHandler(this.btnTextAdd_LI2_Click);
+            // 
+            // btnTextAdd_Li1
+            // 
+            this.btnTextAdd_Li1.Location = new System.Drawing.Point(217, 4);
+            this.btnTextAdd_Li1.Name = "btnTextAdd_Li1";
+            this.btnTextAdd_Li1.Size = new System.Drawing.Size(33, 23);
+            this.btnTextAdd_Li1.TabIndex = 36;
+            this.btnTextAdd_Li1.Text = "-  ";
+            this.btnTextAdd_Li1.UseVisualStyleBackColor = true;
+            this.btnTextAdd_Li1.Click += new System.EventHandler(this.btnTextAdd_Li1_Click);
             // 
             // btnTextAdd_H2
             // 
@@ -300,7 +322,7 @@
             // 
             this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbAssist.FormattingEnabled = true;
-            this.lbAssist.Location = new System.Drawing.Point(48, 68);
+            this.lbAssist.Location = new System.Drawing.Point(45, 97);
             this.lbAssist.Name = "lbAssist";
             this.lbAssist.Size = new System.Drawing.Size(285, 17);
             this.lbAssist.TabIndex = 54;
@@ -311,7 +333,7 @@
             // linkBack
             // 
             this.linkBack.AutoSize = true;
-            this.linkBack.Location = new System.Drawing.Point(15, 73);
+            this.linkBack.Location = new System.Drawing.Point(12, 102);
             this.linkBack.Name = "linkBack";
             this.linkBack.Size = new System.Drawing.Size(38, 12);
             this.linkBack.TabIndex = 55;
@@ -323,7 +345,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LocalMarkdownExplorer.Resource1.search;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 48);
+            this.pictureBox1.Location = new System.Drawing.Point(17, 77);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 16);
             this.pictureBox1.TabIndex = 56;
@@ -331,8 +353,9 @@
             // 
             // btnSetting
             // 
+            this.btnSetting.Enabled = false;
             this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.settings_16;
-            this.btnSetting.Location = new System.Drawing.Point(12, 12);
+            this.btnSetting.Location = new System.Drawing.Point(244, 6);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(58, 26);
             this.btnSetting.TabIndex = 5;
@@ -344,7 +367,7 @@
             // btnOpenDir
             // 
             this.btnOpenDir.Image = global::LocalMarkdownExplorer.Resource1.FolderOpen_16x16_72;
-            this.btnOpenDir.Location = new System.Drawing.Point(169, 12);
+            this.btnOpenDir.Location = new System.Drawing.Point(110, 38);
             this.btnOpenDir.Name = "btnOpenDir";
             this.btnOpenDir.Size = new System.Drawing.Size(98, 26);
             this.btnOpenDir.TabIndex = 15;
@@ -356,7 +379,7 @@
             // btnAdd
             // 
             this.btnAdd.Image = global::LocalMarkdownExplorer.Resource1.NewDocumentHS;
-            this.btnAdd.Location = new System.Drawing.Point(76, 12);
+            this.btnAdd.Location = new System.Drawing.Point(17, 38);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(87, 26);
             this.btnAdd.TabIndex = 10;
@@ -365,31 +388,34 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnTextAdd_Li1
+            // cbRootDir
             // 
-            this.btnTextAdd_Li1.Location = new System.Drawing.Point(217, 4);
-            this.btnTextAdd_Li1.Name = "btnTextAdd_Li1";
-            this.btnTextAdd_Li1.Size = new System.Drawing.Size(33, 23);
-            this.btnTextAdd_Li1.TabIndex = 36;
-            this.btnTextAdd_Li1.Text = "-  ";
-            this.btnTextAdd_Li1.UseVisualStyleBackColor = true;
-            this.btnTextAdd_Li1.Click += new System.EventHandler(this.btnTextAdd_Li1_Click);
+            this.cbRootDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRootDir.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cbRootDir.FormattingEnabled = true;
+            this.cbRootDir.Location = new System.Drawing.Point(17, 9);
+            this.cbRootDir.Name = "cbRootDir";
+            this.cbRootDir.Size = new System.Drawing.Size(184, 24);
+            this.cbRootDir.TabIndex = 57;
+            this.cbRootDir.TextChanged += new System.EventHandler(this.cbRootDir_TextChanged);
             // 
-            // btnTextAdd_LI2
+            // btnAddRootDir
             // 
-            this.btnTextAdd_LI2.Location = new System.Drawing.Point(256, 4);
-            this.btnTextAdd_LI2.Name = "btnTextAdd_LI2";
-            this.btnTextAdd_LI2.Size = new System.Drawing.Size(33, 23);
-            this.btnTextAdd_LI2.TabIndex = 37;
-            this.btnTextAdd_LI2.Text = "   -";
-            this.btnTextAdd_LI2.UseVisualStyleBackColor = true;
-            this.btnTextAdd_LI2.Click += new System.EventHandler(this.btnTextAdd_LI2_Click);
+            this.btnAddRootDir.Location = new System.Drawing.Point(207, 6);
+            this.btnAddRootDir.Name = "btnAddRootDir";
+            this.btnAddRootDir.Size = new System.Drawing.Size(31, 27);
+            this.btnAddRootDir.TabIndex = 58;
+            this.btnAddRootDir.Text = "＋";
+            this.btnAddRootDir.UseVisualStyleBackColor = true;
+            this.btnAddRootDir.Click += new System.EventHandler(this.btnAddRootDir_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.btnAddRootDir);
+            this.Controls.Add(this.cbRootDir);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkBack);
             this.Controls.Add(this.lbAssist);
@@ -446,6 +472,8 @@
         private System.Windows.Forms.Button btnTextAdd_H2;
         private System.Windows.Forms.Button btnTextAdd_LI2;
         private System.Windows.Forms.Button btnTextAdd_Li1;
+        private System.Windows.Forms.ComboBox cbRootDir;
+        private System.Windows.Forms.Button btnAddRootDir;
     }
 }
 

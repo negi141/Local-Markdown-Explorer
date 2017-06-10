@@ -10,18 +10,20 @@ using System.IO;
 using System.Collections;
 using System.Text.RegularExpressions;
 using MarkdownDeep;
+using Codeplex.Data;
+using negi;
 
 namespace LocalMarkdownExplorer
 {
     public partial class Form1 : Form
     {
-        Config config;
         string targetPath;
         Encoding fileEncode;
         string[] extensionText;
         string[] extensionIgnore;
         bool isFirstLoad = true;
         SelectedFile selectedFile;
+        public dynamic config;
 
         #region 初期化メソッド============================================================
 
@@ -37,32 +39,36 @@ namespace LocalMarkdownExplorer
 
         public void initLoad()
         {
-            config = new Config();
-            if (config.PathType == "")
+            string configStr = Util.IO.GetFileReadToEnd("config.json");
+            // データがない場合
+            if (configStr == "")
             {
-                // 初期設定
-                config.PathType = "Absolute";
-                config.AbsolutePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                config.RelativePath = "..\\";
-                config.FileEncode = "Shift_JIS";
-                config.ExtensionText = "txt,md";
-                config.ExtensionIgnore = "exe,dll";
-                config.Save();
+                this.config = new
+                {
+                    paths = new object[]{}/*{
+                        new {
+                            name = "default", 
+                             type = "Relative", 
+                             AbsolutePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                             RelativePath = "..\\" 
+                        }
+                    }*/,
+                    FileEncode = "Shift_JIS",
+                    ExtensionText = "txt,md",
+                    ExtensionIgnore = "exe,dll"
+                };
+                Util.IO.SaveFile("config.json", DynamicJson.Serialize(config));
 
-                FormSetting f = new FormSetting(this);
-                f.ShowDialog(this);
-                f.Dispose();
+                btnAddRootDir_Click(null, null);
             }
             else
             {
-                // パス
-                if (config.PathType == "Absolute")
-                {
-                    targetPath = config.AbsolutePath + "\\";
-                }
-                else if (config.PathType == "Relative")
-                {
-                    targetPath = Path.GetFullPath(config.RelativePath);
+                //保存を押すと追加する
+                //選ぶとそのパスのファイル一覧を開くようにする
+                this.config = DynamicJson.Parse(configStr);
+                cbRootDir.Items.Clear();
+                foreach(var path in config.paths){
+                    cbRootDir.Items.Add(path.name);
                 }
                 // エンコーディング
                 fileEncode = Encoding.GetEncoding(config.FileEncode);
@@ -71,17 +77,17 @@ namespace LocalMarkdownExplorer
                 for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
                 extensionIgnore = config.ExtensionIgnore.Split(',');
                 for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
-
-                this.Text = "LocalMarkdownExplorer  [" + targetPath + "]";
-
+                
                 this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
 
-                this.InitViewListBox();
+                //this.InitViewListBox();
 
                 this.groupBoxFile.Enabled = false;
 
                 this.isFirstLoad = false;
+
+                cbRootDir.SelectedIndex = 0;
             }
         }
 
@@ -91,7 +97,11 @@ namespace LocalMarkdownExplorer
         }
         #endregion
 
-
+        private void setTargetPath(string path)
+        {
+            this.targetPath = path;
+            this.Text = "LocalMarkdownExplorer  [" + path + "]";
+        }
         #region ボタンクリックイベントメソッド============================================================
 
         private void btnSetting_Click(object sender, EventArgs e)
@@ -189,7 +199,7 @@ namespace LocalMarkdownExplorer
 
         private void linkBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            initLoad();
+            cbRootDir_TextChanged(null, null);
             linkBack.Visible = false;
         }
         private void btnHighLight_Click(object sender, EventArgs e)
@@ -220,6 +230,12 @@ namespace LocalMarkdownExplorer
         {
             textAdd("    - ");
         }
+        private void btnAddRootDir_Click(object sender, EventArgs e)
+        {
+            FormAddRootDir f = new FormAddRootDir(this);
+            f.ShowDialog();
+            f.Dispose();
+        }
         #endregion
 
 
@@ -239,7 +255,7 @@ namespace LocalMarkdownExplorer
 
             if (selectedFile.isDirectory)
             {
-                targetPath = selectedFile.fullPath + "\\";
+                setTargetPath(selectedFile.fullPath + "\\");
 
                 this.InitViewListBox();
 
@@ -276,6 +292,24 @@ namespace LocalMarkdownExplorer
             rtbMd.Focus();
         }
 
+        private void cbRootDir_TextChanged(object sender, EventArgs e)
+        {
+            var name = this.cbRootDir.Text;
+            foreach(var path in config.paths){
+                if (name == path.name)
+                {
+                    if (path.type == "Absolute")
+                    {
+                        setTargetPath(targetPath = path.AbsolutePath + "\\");
+                    }
+                    else
+                    {
+                        setTargetPath(Path.GetFullPath(path.RelativePath));
+                    }
+                    SetViewListBox();
+                }
+            }
+        }
         private void lbMdList_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -401,51 +435,56 @@ namespace LocalMarkdownExplorer
 
         private void DirSearch(ListBox listBox, string sDir, string searchWord, bool enableDetailSearch)
         {
-            string[] searchWords = searchWord.Split(' ');
-            string[] arrayDir = Directory.GetDirectories(sDir);
-
-
-            if (searchWord == "")
+            try
             {
-                for (int i = 0; i < arrayDir.Length; i++)
-                {
-                    string fullpath = arrayDir[i];
-                    string key = fullpath.Replace(sDir, "");
-                    object value = new SelectedFile(true, key, fullpath, "");
-                    listBox.Items.Add(new DictionaryEntry(key, value));
-                }
-            }
-            string[] array = Directory.GetFiles(sDir);
-            for (int i = 0; i < array.Length; i++)
-            {
-                string fullpath = array[i];
-                string extension = Path.GetExtension(fullpath);
-                string key = fullpath.Replace(sDir, "");
-                object value = new SelectedFile(false, key, fullpath, extension);
+                string[] searchWords = searchWord.Split(' ');
+                string[] arrayDir = Directory.GetDirectories(sDir);
 
-                // 無視拡張子
-                if (Array.IndexOf(extensionIgnore, extension) != -1) continue;
 
-                if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
+                if (searchWord == "")
                 {
-                    listBox.Items.Add(new DictionaryEntry(key, value));
-                }
-                else
-                {
-                    if (enableDetailSearch)
+                    for (int i = 0; i < arrayDir.Length; i++)
                     {
-                        long fileSize = new FileInfo(fullpath).Length;
-                        // テキストファイルであれば内容を検索, 1MB以下のファイルのみ
-                        if (Array.IndexOf(extensionText, extension) != -1 && fileSize <= 1000000)
+                        string fullpath = arrayDir[i];
+                        string key = fullpath.Replace(sDir, "");
+                        object value = new SelectedFile(true, key, fullpath, "");
+                        listBox.Items.Add(new DictionaryEntry(key, value));
+                    }
+                }
+                string[] array = Directory.GetFiles(sDir);
+                for (int i = 0; i < array.Length; i++)
+                {
+                    string fullpath = array[i];
+                    string extension = Path.GetExtension(fullpath);
+                    string key = fullpath.Replace(sDir, "");
+                    object value = new SelectedFile(false, key, fullpath, extension);
+
+                    // 無視拡張子
+                    if (Array.IndexOf(extensionIgnore, extension) != -1) continue;
+
+                    if (searchWord == "" || Util.String.MultiContain(fullpath.ToLower(), searchWords))
+                    {
+                        listBox.Items.Add(new DictionaryEntry(key, value));
+                    }
+                    else
+                    {
+                        if (enableDetailSearch)
                         {
-                            if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
+                            long fileSize = new FileInfo(fullpath).Length;
+                            // テキストファイルであれば内容を検索, 1MB以下のファイルのみ
+                            if (Array.IndexOf(extensionText, extension) != -1 && fileSize <= 1000000)
                             {
-                                listBox.Items.Add(new DictionaryEntry(key, value));
+                                if (Util.String.MultiContain(Util.IO.GetFileReadToEnd(fullpath, fileEncode), searchWords))
+                                {
+                                    listBox.Items.Add(new DictionaryEntry(key, value));
+                                }
                             }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }
         }
 
         private void openSelectFile()
