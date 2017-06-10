@@ -61,6 +61,16 @@ namespace LocalMarkdownExplorer {
         }
         
         /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap addDir {
+            get {
+                object obj = ResourceManager.GetObject("addDir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   body {
         ///    font-family: helvetica, arial, &apos;lucida grande&apos;, &apos;hiragino kaku gothic pro&apos;,meiryo,&apos;ms pgothic&apos;,sans-serif;
         ///    line-height:26px;

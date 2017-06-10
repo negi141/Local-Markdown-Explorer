@@ -59,9 +59,9 @@ namespace LocalMarkdownExplorer
                 form1.config = new
                 {
                     paths = newPaths,
-                    FileEncode = "Shift_JIS",
-                    ExtensionText = "txt,md",
-                    ExtensionIgnore = "exe,dll"
+                    FileEncode = form1.config.FileEncode,
+                    ExtensionText = form1.config.ExtensionText,
+                    ExtensionIgnore = form1.config.ExtensionIgnore
                 };
                 Util.IO.SaveFile("config.json", DynamicJson.Serialize(form1.config));
 

@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <None Include="Resources\042b_AddCategory_16x16_72.png" />
     <None Include="Resources\default_css.css" />
     <None Include="Resources\delete16.png" />
     <None Include="Resources\settings_16.png" />

@@ -148,7 +148,9 @@
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBoxPath);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormAddRootDir";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ルートフォルダ追加";
             this.Load += new System.EventHandler(this.FormAddRootDir_Load);
             this.groupBoxPath.ResumeLayout(false);

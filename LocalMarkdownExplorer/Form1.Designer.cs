@@ -353,7 +353,6 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Enabled = false;
             this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.settings_16;
             this.btnSetting.Location = new System.Drawing.Point(244, 6);
             this.btnSetting.Name = "btnSetting";
@@ -401,11 +400,11 @@
             // 
             // btnAddRootDir
             // 
+            this.btnAddRootDir.Image = global::LocalMarkdownExplorer.Resource1.addDir;
             this.btnAddRootDir.Location = new System.Drawing.Point(207, 6);
             this.btnAddRootDir.Name = "btnAddRootDir";
             this.btnAddRootDir.Size = new System.Drawing.Size(31, 27);
             this.btnAddRootDir.TabIndex = 58;
-            this.btnAddRootDir.Text = "＋";
             this.btnAddRootDir.UseVisualStyleBackColor = true;
             this.btnAddRootDir.Click += new System.EventHandler(this.btnAddRootDir_Click);
             // 
@@ -427,7 +426,7 @@
             this.Controls.Add(this.lbMdList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "LocalMarkDownSearcher";
+            this.Text = "LocalMarkdownExplorer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabEditor.ResumeLayout(false);

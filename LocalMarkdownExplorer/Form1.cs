@@ -45,14 +45,7 @@ namespace LocalMarkdownExplorer
             {
                 this.config = new
                 {
-                    paths = new object[]{}/*{
-                        new {
-                            name = "default", 
-                             type = "Relative", 
-                             AbsolutePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                             RelativePath = "..\\" 
-                        }
-                    }*/,
+                    paths = new object[]{},
                     FileEncode = "Shift_JIS",
                     ExtensionText = "txt,md",
                     ExtensionIgnore = "exe,dll"
@@ -81,13 +74,19 @@ namespace LocalMarkdownExplorer
                 this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
 
-                //this.InitViewListBox();
-
                 this.groupBoxFile.Enabled = false;
 
                 this.isFirstLoad = false;
-
-                cbRootDir.SelectedIndex = 0;
+                // ある場合
+                if (cbRootDir.Items.Count > 0)
+                {
+                    cbRootDir.SelectedIndex = cbRootDir.Items.Count-1;
+                    btnAdd.Enabled = btnOpenDir.Enabled = tbSearch.Enabled = true;
+                }
+                else
+                {
+                    btnAdd.Enabled = btnOpenDir.Enabled = tbSearch.Enabled = false;
+                }
             }
         }
 
