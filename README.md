@@ -1,16 +1,11 @@
 # LocalMarkdownExplorer
 
 ## 概要
-LocalMarkdownExplorerは、ローカルのMarkdownファイル用のエクスプローラーです。指定したローカルのディレクトリ内に存在するMarkdown・Textファイルを全文検索でき、HTMLプレビュー表示ができます。.NET Framework4以上で動作します。日本語のみです。
+Local Markdown Explorerは、ローカルにあるMarkdownファイル用のエクスプローラーです。指定したローカルのディレクトリ内に存在するMarkdown・Textファイルを全文検索でき、HTMLプレビュー表示ができます。.NET Framework4以上で動作します。
 
-## 利用想定
-* ファイルの検索を想定
-    * まずファイル名やファイルの内容で検索することを想定しているので、検索ボックスが常時表示されており、また検索ボックスに入力中に全文検索を行います。
-* 編集より閲覧を想定
-    * Markdownファイルを選択すると、エディター画面ではなくHTMLプレビュー画面が表示される仕様としています。
-* ソフトウェア自体の配布を想定
-    * 一覧表示させるディレクトリを、絶対パスではなく相対パスでも指定できるようにしているため、このソフトウェア自体をMarkdownファイルと一緒にGit等で共有すれば、そのままビューワーとして利用させることができます。
-    * ソフトウェアのデータサイズが小さく・ファイル数も少ないため、配布が容易です。
+## 特徴
+* ローカルファイル専用
+* ファイルの全文検索
 
 ## 利用
 [LocalMarkdownExplorer.zip](https://github.com/negi141/LocalMarkdownExplorer/raw/master/bin/LocalMarkdownExplorer.zip)
