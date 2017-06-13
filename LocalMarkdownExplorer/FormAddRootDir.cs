@@ -25,6 +25,9 @@ namespace LocalMarkdownExplorer
         private void FormAddRootDir_Load(object sender, EventArgs e)
         {
             rbPathAbsolute.Checked = true;
+            ddlEncoding.Text = "Shift_JIS";
+            tbExtensionText.Text = "txt,md";
+            tbExtensionIgnore.Text = "exe,dll";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -44,7 +47,10 @@ namespace LocalMarkdownExplorer
                         name = path.name,
                         type = path.type,
                         AbsolutePath = path.AbsolutePath,
-                        RelativePath = path.RelativePath
+                        RelativePath = path.RelativePath,
+                        Encoding = path.Encoding,
+                        ExtensionText = path.ExtensionText,
+                        ExtensionIgnore = path.ExtensionIgnore,
                     };
                     i++;
                 }
@@ -54,14 +60,14 @@ namespace LocalMarkdownExplorer
                     name = tbName.Text,
                     type = (rbPathAbsolute.Checked) ? "Absolute" : "Relative",
                     AbsolutePath = tbPathAbsolute.Text,
-                    RelativePath = tbPathRelative.Text
+                    RelativePath = tbPathRelative.Text,
+                    Encoding = ddlEncoding.Text,
+                    ExtensionText = tbExtensionText.Text,
+                    ExtensionIgnore = tbExtensionIgnore.Text,
                 };
                 form1.config = new
                 {
                     paths = newPaths,
-                    FileEncode = form1.config.FileEncode,
-                    ExtensionText = form1.config.ExtensionText,
-                    ExtensionIgnore = form1.config.ExtensionIgnore
                 };
                 Util.IO.SaveFile("config.json", DynamicJson.Serialize(form1.config));
 

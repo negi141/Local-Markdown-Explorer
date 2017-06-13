@@ -46,9 +46,6 @@ namespace LocalMarkdownExplorer
                 this.config = new
                 {
                     paths = new object[]{},
-                    FileEncode = "Shift_JIS",
-                    ExtensionText = "txt,md",
-                    ExtensionIgnore = "exe,dll"
                 };
                 Util.IO.SaveFile("config.json", DynamicJson.Serialize(config));
 
@@ -63,13 +60,6 @@ namespace LocalMarkdownExplorer
                 foreach(var path in config.paths){
                     cbRootDir.Items.Add(path.name);
                 }
-                // エンコーディング
-                fileEncode = Encoding.GetEncoding(config.FileEncode);
-                // 拡張子
-                extensionText = config.ExtensionText.Split(',');
-                for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
-                extensionIgnore = config.ExtensionIgnore.Split(',');
-                for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
                 
                 this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
@@ -305,6 +295,15 @@ namespace LocalMarkdownExplorer
                     {
                         setTargetPath(Path.GetFullPath(path.RelativePath));
                     }
+
+                    // エンコーディング
+                    fileEncode = Encoding.GetEncoding(path.Encoding);
+                    // 拡張子
+                    extensionText = path.ExtensionText.Split(',');
+                    for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
+                    extensionIgnore = path.ExtensionIgnore.Split(',');
+                    for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
+
                     SetViewListBox();
                 }
             }

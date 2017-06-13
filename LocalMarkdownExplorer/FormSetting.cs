@@ -24,9 +24,9 @@ namespace LocalMarkdownExplorer
 
         private void FormSetting_Load(object sender, EventArgs e)
         {
-            ddlEncoding.Text = form1.config.FileEncode;
-            tbExtensionText.Text = form1.config.ExtensionText;
-            tbExtensionIgnore.Text = form1.config.ExtensionIgnore;
+            //ddlEncoding.Text = form1.config.FileEncode;
+            //tbExtensionText.Text = form1.config.ExtensionText;
+            //tbExtensionIgnore.Text = form1.config.ExtensionIgnore;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -52,9 +52,9 @@ namespace LocalMarkdownExplorer
             form1.config = new
             {
                 paths = newPaths,
-                FileEncode = ddlEncoding.SelectedItem.ToString(),
-                ExtensionText = tbExtensionText.Text,
-                ExtensionIgnore = tbExtensionIgnore.Text
+                //FileEncode = ddlEncoding.SelectedItem.ToString(),
+                //ExtensionText = tbExtensionText.Text,
+                //ExtensionIgnore = tbExtensionIgnore.Text
             };
             Util.IO.SaveFile("config.json", DynamicJson.Serialize(form1.config));
             form1.initLoad();

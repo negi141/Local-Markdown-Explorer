@@ -53,7 +53,6 @@
             this.lbAssist = new System.Windows.Forms.ListBox();
             this.linkBack = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnSetting = new System.Windows.Forms.Button();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cbRootDir = new System.Windows.Forms.ComboBox();
@@ -351,18 +350,6 @@
             this.pictureBox1.TabIndex = 56;
             this.pictureBox1.TabStop = false;
             // 
-            // btnSetting
-            // 
-            this.btnSetting.Image = global::LocalMarkdownExplorer.Resource1.settings_16;
-            this.btnSetting.Location = new System.Drawing.Point(244, 6);
-            this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(58, 26);
-            this.btnSetting.TabIndex = 5;
-            this.btnSetting.Text = "設定";
-            this.btnSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSetting.UseVisualStyleBackColor = true;
-            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
-            // 
             // btnOpenDir
             // 
             this.btnOpenDir.Image = global::LocalMarkdownExplorer.Resource1.FolderOpen_16x16_72;
@@ -394,14 +381,14 @@
             this.cbRootDir.FormattingEnabled = true;
             this.cbRootDir.Location = new System.Drawing.Point(17, 9);
             this.cbRootDir.Name = "cbRootDir";
-            this.cbRootDir.Size = new System.Drawing.Size(184, 24);
+            this.cbRootDir.Size = new System.Drawing.Size(164, 24);
             this.cbRootDir.TabIndex = 57;
             this.cbRootDir.TextChanged += new System.EventHandler(this.cbRootDir_TextChanged);
             // 
             // btnAddRootDir
             // 
             this.btnAddRootDir.Image = global::LocalMarkdownExplorer.Resource1.addDir;
-            this.btnAddRootDir.Location = new System.Drawing.Point(207, 6);
+            this.btnAddRootDir.Location = new System.Drawing.Point(187, 6);
             this.btnAddRootDir.Name = "btnAddRootDir";
             this.btnAddRootDir.Size = new System.Drawing.Size(31, 27);
             this.btnAddRootDir.TabIndex = 58;
@@ -419,7 +406,6 @@
             this.Controls.Add(this.linkBack);
             this.Controls.Add(this.lbAssist);
             this.Controls.Add(this.groupBoxFile);
-            this.Controls.Add(this.btnSetting);
             this.Controls.Add(this.btnOpenDir);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.btnAdd);
@@ -458,7 +444,6 @@
         private System.Windows.Forms.Label lbCautionMessge;
         private System.Windows.Forms.TabPage tabHTML;
         private System.Windows.Forms.TextBox tbHTML;
-        private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.GroupBox groupBoxFile;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ListBox lbAssist;

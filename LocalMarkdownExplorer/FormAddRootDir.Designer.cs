@@ -39,7 +39,16 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBoxEncode = new System.Windows.Forms.GroupBox();
+            this.ddlEncoding = new System.Windows.Forms.ComboBox();
+            this.groupBoxExtension = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbExtensionIgnore = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbExtensionText = new System.Windows.Forms.TextBox();
             this.groupBoxPath.SuspendLayout();
+            this.groupBoxEncode.SuspendLayout();
+            this.groupBoxExtension.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxPath
@@ -55,7 +64,7 @@
             this.groupBoxPath.Size = new System.Drawing.Size(377, 119);
             this.groupBoxPath.TabIndex = 10;
             this.groupBoxPath.TabStop = false;
-            this.groupBoxPath.Text = "追加するフォルダ";
+            this.groupBoxPath.Text = "追加するフォルダのパス";
             // 
             // tbPathRelative
             // 
@@ -115,7 +124,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(137, 172);
+            this.btnSave.Location = new System.Drawing.Point(139, 342);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 23);
             this.btnSave.TabIndex = 11;
@@ -139,11 +148,80 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "表示名";
             // 
+            // groupBoxEncode
+            // 
+            this.groupBoxEncode.Controls.Add(this.ddlEncoding);
+            this.groupBoxEncode.Location = new System.Drawing.Point(12, 187);
+            this.groupBoxEncode.Name = "groupBoxEncode";
+            this.groupBoxEncode.Size = new System.Drawing.Size(377, 50);
+            this.groupBoxEncode.TabIndex = 14;
+            this.groupBoxEncode.TabStop = false;
+            this.groupBoxEncode.Text = "表示・保存時の文字コード";
+            // 
+            // ddlEncoding
+            // 
+            this.ddlEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlEncoding.FormattingEnabled = true;
+            this.ddlEncoding.Items.AddRange(new object[] {
+            "Shift_JIS",
+            "UTF-8"});
+            this.ddlEncoding.Location = new System.Drawing.Point(52, 19);
+            this.ddlEncoding.Name = "ddlEncoding";
+            this.ddlEncoding.Size = new System.Drawing.Size(121, 20);
+            this.ddlEncoding.TabIndex = 1;
+            // 
+            // groupBoxExtension
+            // 
+            this.groupBoxExtension.Controls.Add(this.label2);
+            this.groupBoxExtension.Controls.Add(this.tbExtensionIgnore);
+            this.groupBoxExtension.Controls.Add(this.label3);
+            this.groupBoxExtension.Controls.Add(this.tbExtensionText);
+            this.groupBoxExtension.Location = new System.Drawing.Point(12, 257);
+            this.groupBoxExtension.Name = "groupBoxExtension";
+            this.groupBoxExtension.Size = new System.Drawing.Size(377, 79);
+            this.groupBoxExtension.TabIndex = 15;
+            this.groupBoxExtension.TabStop = false;
+            this.groupBoxExtension.Text = "拡張子";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "除外する拡張子：";
+            // 
+            // tbExtensionIgnore
+            // 
+            this.tbExtensionIgnore.Location = new System.Drawing.Point(115, 48);
+            this.tbExtensionIgnore.Name = "tbExtensionIgnore";
+            this.tbExtensionIgnore.Size = new System.Drawing.Size(202, 19);
+            this.tbExtensionIgnore.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 12);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "テキスト拡張子：";
+            // 
+            // tbExtensionText
+            // 
+            this.tbExtensionText.Location = new System.Drawing.Point(115, 23);
+            this.tbExtensionText.Name = "tbExtensionText";
+            this.tbExtensionText.Size = new System.Drawing.Size(202, 19);
+            this.tbExtensionText.TabIndex = 7;
+            // 
             // FormAddRootDir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 201);
+            this.ClientSize = new System.Drawing.Size(399, 380);
+            this.Controls.Add(this.groupBoxExtension);
+            this.Controls.Add(this.groupBoxEncode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.btnSave);
@@ -155,6 +233,9 @@
             this.Load += new System.EventHandler(this.FormAddRootDir_Load);
             this.groupBoxPath.ResumeLayout(false);
             this.groupBoxPath.PerformLayout();
+            this.groupBoxEncode.ResumeLayout(false);
+            this.groupBoxExtension.ResumeLayout(false);
+            this.groupBoxExtension.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +254,12 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBoxEncode;
+        private System.Windows.Forms.ComboBox ddlEncoding;
+        private System.Windows.Forms.GroupBox groupBoxExtension;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbExtensionIgnore;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbExtensionText;
     }
 }
