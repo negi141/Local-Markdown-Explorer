@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tbSearch = new System.Windows.Forms.TextBox();
+            this.linkBack = new System.Windows.Forms.LinkLabel();
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
@@ -50,13 +51,14 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
-            this.lbAssist = new System.Windows.Forms.ListBox();
-            this.linkBack = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnOpenDir = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cbRootDir = new System.Windows.Forms.ComboBox();
             this.btnAddRootDir = new System.Windows.Forms.Button();
+            this.btnEditRootDir = new System.Windows.Forms.Button();
+            this.lbAssist = new System.Windows.Forms.ListBox();
+            this.btnAssistClose = new System.Windows.Forms.Button();
             this.tabEditor.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
@@ -74,6 +76,18 @@
             this.tbSearch.TabIndex = 20;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
+            // 
+            // linkBack
+            // 
+            this.linkBack.AutoSize = true;
+            this.linkBack.Location = new System.Drawing.Point(5, 102);
+            this.linkBack.Name = "linkBack";
+            this.linkBack.Size = new System.Drawing.Size(38, 12);
+            this.linkBack.TabIndex = 20;
+            this.linkBack.TabStop = true;
+            this.linkBack.Text = "＜戻る";
+            this.linkBack.Visible = false;
+            this.linkBack.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBack_LinkClicked);
             // 
             // lbMdList
             // 
@@ -317,30 +331,6 @@
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
-            // lbAssist
-            // 
-            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbAssist.FormattingEnabled = true;
-            this.lbAssist.Location = new System.Drawing.Point(45, 97);
-            this.lbAssist.Name = "lbAssist";
-            this.lbAssist.Size = new System.Drawing.Size(285, 17);
-            this.lbAssist.TabIndex = 54;
-            this.lbAssist.Visible = false;
-            this.lbAssist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAssist_KeyDown);
-            this.lbAssist.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbAssist_MouseUp);
-            // 
-            // linkBack
-            // 
-            this.linkBack.AutoSize = true;
-            this.linkBack.Location = new System.Drawing.Point(12, 102);
-            this.linkBack.Name = "linkBack";
-            this.linkBack.Size = new System.Drawing.Size(38, 12);
-            this.linkBack.TabIndex = 55;
-            this.linkBack.TabStop = true;
-            this.linkBack.Text = "＜戻る";
-            this.linkBack.Visible = false;
-            this.linkBack.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkBack_LinkClicked);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LocalMarkdownExplorer.Resource1.search;
@@ -395,11 +385,46 @@
             this.btnAddRootDir.UseVisualStyleBackColor = true;
             this.btnAddRootDir.Click += new System.EventHandler(this.btnAddRootDir_Click);
             // 
+            // btnEditRootDir
+            // 
+            this.btnEditRootDir.Image = global::LocalMarkdownExplorer.Resource1.editDir;
+            this.btnEditRootDir.Location = new System.Drawing.Point(224, 6);
+            this.btnEditRootDir.Name = "btnEditRootDir";
+            this.btnEditRootDir.Size = new System.Drawing.Size(31, 27);
+            this.btnEditRootDir.TabIndex = 59;
+            this.btnEditRootDir.UseVisualStyleBackColor = true;
+            this.btnEditRootDir.Click += new System.EventHandler(this.btnEditRootDir_Click);
+            // 
+            // lbAssist
+            // 
+            this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbAssist.FormattingEnabled = true;
+            this.lbAssist.Location = new System.Drawing.Point(43, 97);
+            this.lbAssist.Name = "lbAssist";
+            this.lbAssist.Size = new System.Drawing.Size(285, 17);
+            this.lbAssist.TabIndex = 54;
+            this.lbAssist.Visible = false;
+            this.lbAssist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAssist_KeyDown);
+            this.lbAssist.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbAssist_MouseUp);
+            // 
+            // btnAssistClose
+            // 
+            this.btnAssistClose.Location = new System.Drawing.Point(303, 98);
+            this.btnAssistClose.Name = "btnAssistClose";
+            this.btnAssistClose.Size = new System.Drawing.Size(24, 21);
+            this.btnAssistClose.TabIndex = 60;
+            this.btnAssistClose.Text = "×";
+            this.btnAssistClose.UseVisualStyleBackColor = true;
+            this.btnAssistClose.Visible = false;
+            this.btnAssistClose.Click += new System.EventHandler(this.btnAssistClose_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.btnAssistClose);
+            this.Controls.Add(this.btnEditRootDir);
             this.Controls.Add(this.btnAddRootDir);
             this.Controls.Add(this.cbRootDir);
             this.Controls.Add(this.pictureBox1);
@@ -446,7 +471,6 @@
         private System.Windows.Forms.TextBox tbHTML;
         private System.Windows.Forms.GroupBox groupBoxFile;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ListBox lbAssist;
         private System.Windows.Forms.LinkLabel linkBack;
         private System.Windows.Forms.RichTextBox rtbMd;
         private System.Windows.Forms.Button btnHighLight;
@@ -458,6 +482,9 @@
         private System.Windows.Forms.Button btnTextAdd_Li1;
         private System.Windows.Forms.ComboBox cbRootDir;
         private System.Windows.Forms.Button btnAddRootDir;
+        private System.Windows.Forms.Button btnEditRootDir;
+        private System.Windows.Forms.ListBox lbAssist;
+        private System.Windows.Forms.Button btnAssistClose;
     }
 }
 

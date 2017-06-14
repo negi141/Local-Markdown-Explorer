@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
-            this.tbPathRelative = new System.Windows.Forms.TextBox();
+            this.tbRelativePath = new System.Windows.Forms.TextBox();
             this.btnRelativeParentPath = new System.Windows.Forms.Button();
             this.btnDirBrowse = new System.Windows.Forms.Button();
             this.rbPathRelative = new System.Windows.Forms.RadioButton();
-            this.tbPathAbsolute = new System.Windows.Forms.TextBox();
+            this.tbAbsolutePath = new System.Windows.Forms.TextBox();
             this.rbPathAbsolute = new System.Windows.Forms.RadioButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -53,11 +53,11 @@
             // 
             // groupBoxPath
             // 
-            this.groupBoxPath.Controls.Add(this.tbPathRelative);
+            this.groupBoxPath.Controls.Add(this.tbRelativePath);
             this.groupBoxPath.Controls.Add(this.btnRelativeParentPath);
             this.groupBoxPath.Controls.Add(this.btnDirBrowse);
             this.groupBoxPath.Controls.Add(this.rbPathRelative);
-            this.groupBoxPath.Controls.Add(this.tbPathAbsolute);
+            this.groupBoxPath.Controls.Add(this.tbAbsolutePath);
             this.groupBoxPath.Controls.Add(this.rbPathAbsolute);
             this.groupBoxPath.Location = new System.Drawing.Point(12, 47);
             this.groupBoxPath.Name = "groupBoxPath";
@@ -66,12 +66,12 @@
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "追加するフォルダのパス";
             // 
-            // tbPathRelative
+            // tbRelativePath
             // 
-            this.tbPathRelative.Location = new System.Drawing.Point(52, 91);
-            this.tbPathRelative.Name = "tbPathRelative";
-            this.tbPathRelative.Size = new System.Drawing.Size(160, 19);
-            this.tbPathRelative.TabIndex = 11;
+            this.tbRelativePath.Location = new System.Drawing.Point(52, 91);
+            this.tbRelativePath.Name = "tbRelativePath";
+            this.tbRelativePath.Size = new System.Drawing.Size(160, 19);
+            this.tbRelativePath.TabIndex = 11;
             // 
             // btnRelativeParentPath
             // 
@@ -104,12 +104,12 @@
             this.rbPathRelative.Text = "相対パスで指定";
             this.rbPathRelative.UseVisualStyleBackColor = true;
             // 
-            // tbPathAbsolute
+            // tbAbsolutePath
             // 
-            this.tbPathAbsolute.Location = new System.Drawing.Point(52, 44);
-            this.tbPathAbsolute.Name = "tbPathAbsolute";
-            this.tbPathAbsolute.Size = new System.Drawing.Size(257, 19);
-            this.tbPathAbsolute.TabIndex = 6;
+            this.tbAbsolutePath.Location = new System.Drawing.Point(52, 44);
+            this.tbAbsolutePath.Name = "tbAbsolutePath";
+            this.tbAbsolutePath.Size = new System.Drawing.Size(257, 19);
+            this.tbAbsolutePath.TabIndex = 6;
             // 
             // rbPathAbsolute
             // 
@@ -244,11 +244,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxPath;
-        private System.Windows.Forms.TextBox tbPathRelative;
+        private System.Windows.Forms.TextBox tbRelativePath;
         private System.Windows.Forms.Button btnRelativeParentPath;
         private System.Windows.Forms.Button btnDirBrowse;
         private System.Windows.Forms.RadioButton rbPathRelative;
-        private System.Windows.Forms.TextBox tbPathAbsolute;
+        private System.Windows.Forms.TextBox tbAbsolutePath;
         private System.Windows.Forms.RadioButton rbPathAbsolute;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;

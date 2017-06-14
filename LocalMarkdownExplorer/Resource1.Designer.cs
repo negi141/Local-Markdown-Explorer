@@ -124,6 +124,16 @@ namespace LocalMarkdownExplorer {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap editDir {
+            get {
+                object obj = ResourceManager.GetObject("editDir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap Folder_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Folder_16x16", resourceCulture);

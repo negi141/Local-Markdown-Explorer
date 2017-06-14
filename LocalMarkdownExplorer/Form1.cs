@@ -18,6 +18,7 @@ namespace LocalMarkdownExplorer
     public partial class Form1 : Form
     {
         string targetPath;
+        public string selectedDirName = "";
         Encoding fileEncode;
         string[] extensionText;
         string[] extensionIgnore;
@@ -52,25 +53,31 @@ namespace LocalMarkdownExplorer
                 btnAddRootDir_Click(null, null);
             }
             else
-            {
-                //保存を押すと追加する
-                //選ぶとそのパスのファイル一覧を開くようにする
-                this.config = DynamicJson.Parse(configStr);
-                cbRootDir.Items.Clear();
-                foreach(var path in config.paths){
-                    cbRootDir.Items.Add(path.name);
-                }
-                
+            {                
                 this.lbCautionMessge.Text = "(内容を変更中)";
                 this.lbCautionMessge.Visible = false;
 
                 this.groupBoxFile.Enabled = false;
 
                 this.isFirstLoad = false;
+                // コンボボックスに追加
+                this.config = DynamicJson.Parse(configStr);
+                cbRootDir.Items.Clear();
+                foreach (var path in config.paths)
+                {
+                    cbRootDir.Items.Add(path.name);
+                }
                 // ある場合
                 if (cbRootDir.Items.Count > 0)
                 {
-                    cbRootDir.SelectedIndex = cbRootDir.Items.Count-1;
+                    if (selectedDirName == "")
+                    {
+                        cbRootDir.SelectedIndex = cbRootDir.Items.Count - 1;
+                    }
+                    else
+                    {
+                        cbRootDir.Text = selectedDirName;
+                    }
                     btnAdd.Enabled = btnOpenDir.Enabled = tbSearch.Enabled = true;
                 }
                 else
@@ -86,16 +93,25 @@ namespace LocalMarkdownExplorer
         }
         #endregion
 
-        private void setTargetPath(string path)
-        {
-            this.targetPath = path;
-            this.Text = "LocalMarkdownExplorer  [" + path + "]";
-        }
         #region ボタンクリックイベントメソッド============================================================
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
             FormSetting f = new FormSetting(this);
+            f.ShowDialog();
+            f.Dispose();
+        }
+        private void btnAddRootDir_Click(object sender, EventArgs e)
+        {
+            FormAddRootDir f = new FormAddRootDir(this);
+            f.ShowDialog();
+            f.Dispose();
+        }
+
+        private void btnEditRootDir_Click(object sender, EventArgs e)
+        {
+            FormAddRootDir f = new FormAddRootDir(this);
+            f.SetEditName(this.cbRootDir.Text);
             f.ShowDialog();
             f.Dispose();
         }
@@ -219,20 +235,44 @@ namespace LocalMarkdownExplorer
         {
             textAdd("    - ");
         }
-        private void btnAddRootDir_Click(object sender, EventArgs e)
+        private void btnAssistClose_Click(object sender, EventArgs e)
         {
-            FormAddRootDir f = new FormAddRootDir(this);
-            f.ShowDialog();
-            f.Dispose();
+            AssistVisible(false);
         }
         #endregion
 
-
         #region 選択イベントメソッド============================================================
-        
+
+        private void cbRootDir_TextChanged(object sender, EventArgs e)
+        {
+            var name = this.cbRootDir.Text;
+            foreach (var path in config.paths)
+            {
+                if (name == path.name)
+                {
+                    if (path.type == "Absolute")
+                    {
+                        setTargetPath(targetPath = path.AbsolutePath + "\\");
+                    }
+                    else
+                    {
+                        setTargetPath(Path.GetFullPath(path.RelativePath));
+                    }
+
+                    // エンコーディング
+                    fileEncode = Encoding.GetEncoding(path.Encoding);
+                    // 拡張子
+                    extensionText = path.ExtensionText.Split(',');
+                    for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
+                    extensionIgnore = path.ExtensionIgnore.Split(',');
+                    for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
+
+                    SetViewListBox();
+                }
+            }
+        }
         private void lbAssist_MouseUp(object sender, MouseEventArgs e)
         {
-            lbAssist.Visible = false;
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
             this.lbMdList.Text = dictionaryEntry.Key.ToString();
         }
@@ -279,34 +319,6 @@ namespace LocalMarkdownExplorer
                 MessageBox.Show(ex.Message);
             }
             rtbMd.Focus();
-        }
-
-        private void cbRootDir_TextChanged(object sender, EventArgs e)
-        {
-            var name = this.cbRootDir.Text;
-            foreach(var path in config.paths){
-                if (name == path.name)
-                {
-                    if (path.type == "Absolute")
-                    {
-                        setTargetPath(targetPath = path.AbsolutePath + "\\");
-                    }
-                    else
-                    {
-                        setTargetPath(Path.GetFullPath(path.RelativePath));
-                    }
-
-                    // エンコーディング
-                    fileEncode = Encoding.GetEncoding(path.Encoding);
-                    // 拡張子
-                    extensionText = path.ExtensionText.Split(',');
-                    for (int i = 0; i < extensionText.Length; i++) extensionText[i] = "." + extensionText[i];
-                    extensionIgnore = path.ExtensionIgnore.Split(',');
-                    for (int i = 0; i < extensionIgnore.Length; i++) extensionIgnore[i] = "." + extensionIgnore[i];
-
-                    SetViewListBox();
-                }
-            }
         }
         private void lbMdList_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -365,7 +377,7 @@ namespace LocalMarkdownExplorer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                lbAssist.Visible = false;
+                AssistVisible(false);
                 DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
                 this.lbMdList.Text = dictionaryEntry.Key.ToString();
             }
@@ -375,7 +387,7 @@ namespace LocalMarkdownExplorer
         {
             if (tbSearch.Text == "")
             {
-                lbAssist.Visible = false;
+                AssistVisible(false);
                 return;
             }
             this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
@@ -395,6 +407,17 @@ namespace LocalMarkdownExplorer
 
 
         #region 汎用メソッド============================================================
+        
+        private void AssistVisible(bool visible)
+        {
+            lbAssist.Visible = btnAssistClose.Visible = visible; 
+        }
+        
+        private void setTargetPath(string path)
+        {
+            this.targetPath = path;
+            this.Text = "LocalMarkdownExplorer  [" + cbRootDir.Text + "]";
+        }
         private void textAdd(string addText)
         {
             int index = rtbMd.SelectionStart;
@@ -421,13 +444,14 @@ namespace LocalMarkdownExplorer
 
         private void SetAssistListBox(string searchWord, bool enableDetailSearch)
         {
-            lbAssist.Visible = true;
+            AssistVisible(true);
             this.lbAssist.Items.Clear();
             this.lbAssist.DisplayMember = "Key";
             this.lbAssist.ValueMember = "Value";
             this.DirSearch(lbAssist, targetPath, searchWord, enableDetailSearch);
-            var showLength = (this.lbAssist.Items.Count <= 10) ? this.lbAssist.Items.Count : 10;
-            if (showLength == 0) lbAssist.Visible = false;
+            var dispLength = 20;
+            var showLength = (this.lbAssist.Items.Count <= dispLength) ? this.lbAssist.Items.Count : dispLength;
+            if (showLength == 0) AssistVisible(false);
             this.lbAssist.Height = this.lbAssist.ItemHeight * (showLength+1);
         }
 
