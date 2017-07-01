@@ -64,22 +64,22 @@
             this.groupBoxPath.Size = new System.Drawing.Size(377, 119);
             this.groupBoxPath.TabIndex = 10;
             this.groupBoxPath.TabStop = false;
-            this.groupBoxPath.Text = "追加するフォルダのパス";
+            this.groupBoxPath.Text = "参照するフォルダのパス";
             // 
             // tbRelativePath
             // 
             this.tbRelativePath.Location = new System.Drawing.Point(52, 91);
             this.tbRelativePath.Name = "tbRelativePath";
-            this.tbRelativePath.Size = new System.Drawing.Size(160, 19);
+            this.tbRelativePath.Size = new System.Drawing.Size(184, 19);
             this.tbRelativePath.TabIndex = 11;
             // 
             // btnRelativeParentPath
             // 
-            this.btnRelativeParentPath.Location = new System.Drawing.Point(218, 89);
+            this.btnRelativeParentPath.Location = new System.Drawing.Point(242, 89);
             this.btnRelativeParentPath.Name = "btnRelativeParentPath";
-            this.btnRelativeParentPath.Size = new System.Drawing.Size(75, 23);
+            this.btnRelativeParentPath.Size = new System.Drawing.Size(120, 23);
             this.btnRelativeParentPath.TabIndex = 0;
-            this.btnRelativeParentPath.Text = "上フォルダ";
+            this.btnRelativeParentPath.Text = "exeの一つ上フォルダ";
             this.btnRelativeParentPath.UseVisualStyleBackColor = true;
             this.btnRelativeParentPath.Click += new System.EventHandler(this.btnRelativeParentPath_Click);
             // 
@@ -146,7 +146,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 13;
-            this.label1.Text = "表示名";
+            this.label1.Text = "設定名";
             // 
             // groupBoxEncode
             // 
@@ -156,7 +156,7 @@
             this.groupBoxEncode.Size = new System.Drawing.Size(377, 50);
             this.groupBoxEncode.TabIndex = 14;
             this.groupBoxEncode.TabStop = false;
-            this.groupBoxEncode.Text = "表示・保存時の文字コード";
+            this.groupBoxEncode.Text = "ファイルの文字コード";
             // 
             // ddlEncoding
             // 
@@ -188,13 +188,13 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(25, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 12);
+            this.label2.Size = new System.Drawing.Size(132, 12);
             this.label2.TabIndex = 10;
-            this.label2.Text = "除外する拡張子：";
+            this.label2.Text = "リストから除外する拡張子：";
             // 
             // tbExtensionIgnore
             // 
-            this.tbExtensionIgnore.Location = new System.Drawing.Point(115, 48);
+            this.tbExtensionIgnore.Location = new System.Drawing.Point(159, 48);
             this.tbExtensionIgnore.Name = "tbExtensionIgnore";
             this.tbExtensionIgnore.Size = new System.Drawing.Size(202, 19);
             this.tbExtensionIgnore.TabIndex = 9;
@@ -204,13 +204,13 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(25, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 12);
+            this.label3.Size = new System.Drawing.Size(128, 12);
             this.label3.TabIndex = 8;
-            this.label3.Text = "テキスト拡張子：";
+            this.label3.Text = "テキストとして扱う拡張子：";
             // 
             // tbExtensionText
             // 
-            this.tbExtensionText.Location = new System.Drawing.Point(115, 23);
+            this.tbExtensionText.Location = new System.Drawing.Point(159, 23);
             this.tbExtensionText.Name = "tbExtensionText";
             this.tbExtensionText.Size = new System.Drawing.Size(202, 19);
             this.tbExtensionText.TabIndex = 7;

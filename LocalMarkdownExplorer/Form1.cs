@@ -95,12 +95,6 @@ namespace LocalMarkdownExplorer
 
         #region ボタンクリックイベントメソッド============================================================
 
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-            FormSetting f = new FormSetting(this);
-            f.ShowDialog();
-            f.Dispose();
-        }
         private void btnAddRootDir_Click(object sender, EventArgs e)
         {
             FormAddRootDir f = new FormAddRootDir(this);
@@ -181,6 +175,11 @@ namespace LocalMarkdownExplorer
             }
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            tbSearch_TextChanged(null, null);
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(selectedFile.fileName + "を削除してよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
@@ -207,11 +206,19 @@ namespace LocalMarkdownExplorer
             cbRootDir_TextChanged(null, null);
             linkBack.Visible = false;
         }
+        private void btnAssistClose_Click(object sender, EventArgs e)
+        {
+            AssistVisible(false);
+        }
+
         private void btnHighLight_Click(object sender, EventArgs e)
         {
             highLight();
         }
+        #endregion
 
+
+        #region エディターパネル内ボタンクリックイベントメソッド============================================================
         private void btnTextAdd_Code_Click(object sender, EventArgs e)
         {
             textAdd("~~~~~~~~~~~~~~~~");
@@ -235,11 +242,8 @@ namespace LocalMarkdownExplorer
         {
             textAdd("    - ");
         }
-        private void btnAssistClose_Click(object sender, EventArgs e)
-        {
-            AssistVisible(false);
-        }
         #endregion
+
 
         #region 選択イベントメソッド============================================================
 
@@ -275,6 +279,7 @@ namespace LocalMarkdownExplorer
         {
             DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
             this.lbMdList.Text = dictionaryEntry.Key.ToString();
+            if (lbAssist.Items.Count <= 1) AssistVisible(false);
         }
 
         private void lbMdList_SelectedIndexChanged(object sender, EventArgs e)
@@ -357,6 +362,25 @@ namespace LocalMarkdownExplorer
 
             e.DrawFocusRectangle();
         }
+
+        private void lbAssist_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            lbAssist.DrawMode = DrawMode.OwnerDrawFixed;
+            e.DrawBackground();
+            Brush brush = null;
+            if ((e.State & DrawItemState.Selected) != DrawItemState.Selected)
+            {
+                brush = new SolidBrush(Color.Black);
+            }
+            else
+            {
+                brush = new SolidBrush(e.ForeColor);
+            }
+            DictionaryEntry dictionaryEntry = (DictionaryEntry)((ListBox)sender).Items[e.Index];
+            SelectedFile file = (SelectedFile)dictionaryEntry.Value;
+            e.Graphics.DrawString(file.fileName, e.Font, brush, e.Bounds, StringFormat.GenericDefault);
+            e.DrawFocusRectangle();
+        }
         #endregion
 
 
@@ -364,6 +388,7 @@ namespace LocalMarkdownExplorer
 
         private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
+            // 検索フォームで↓を押したら候補リストボックスにフォーカスする
             if (e.KeyCode == Keys.Down)
             {
                 if (lbAssist.Visible)
@@ -371,15 +396,6 @@ namespace LocalMarkdownExplorer
                     lbAssist.SelectedIndex = 0;
                     lbAssist.Focus();
                 }
-            }
-        }
-        private void lbAssist_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                AssistVisible(false);
-                DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
-                this.lbMdList.Text = dictionaryEntry.Key.ToString();
             }
         }
 
@@ -391,6 +407,16 @@ namespace LocalMarkdownExplorer
                 return;
             }
             this.SetAssistListBox(this.tbSearch.Text.ToLower(), true);
+        }
+
+        private void lbAssist_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DictionaryEntry dictionaryEntry = (DictionaryEntry)this.lbAssist.SelectedItem;
+                this.lbMdList.Text = dictionaryEntry.Key.ToString();
+                if (lbAssist.Items.Count <= 1) AssistVisible(false);
+            }
         }
 
         private void tbTitle_TextChanged(object sender, EventArgs e)
@@ -648,7 +674,6 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
-
 
     }
 }

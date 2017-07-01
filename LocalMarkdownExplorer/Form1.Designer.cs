@@ -33,6 +33,8 @@
             this.linkBack = new System.Windows.Forms.LinkLabel();
             this.lbMdList = new System.Windows.Forms.ListBox();
             this.tabEditor = new System.Windows.Forms.TabControl();
+            this.tabMd = new System.Windows.Forms.TabPage();
+            this.webMd = new System.Windows.Forms.WebBrowser();
             this.tabText = new System.Windows.Forms.TabPage();
             this.btnTextAdd_LI2 = new System.Windows.Forms.Button();
             this.btnTextAdd_Li1 = new System.Windows.Forms.Button();
@@ -41,8 +43,6 @@
             this.btnTextAdd_Code = new System.Windows.Forms.Button();
             this.btnHighLight = new System.Windows.Forms.Button();
             this.rtbMd = new System.Windows.Forms.RichTextBox();
-            this.tabMd = new System.Windows.Forms.TabPage();
-            this.webMd = new System.Windows.Forms.WebBrowser();
             this.tabHTML = new System.Windows.Forms.TabPage();
             this.tbHTML = new System.Windows.Forms.TextBox();
             this.tbTitle = new System.Windows.Forms.TextBox();
@@ -60,8 +60,8 @@
             this.lbAssist = new System.Windows.Forms.ListBox();
             this.btnAssistClose = new System.Windows.Forms.Button();
             this.tabEditor.SuspendLayout();
-            this.tabText.SuspendLayout();
             this.tabMd.SuspendLayout();
+            this.tabText.SuspendLayout();
             this.tabHTML.SuspendLayout();
             this.groupBoxFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -70,7 +70,7 @@
             // tbSearch
             // 
             this.tbSearch.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbSearch.Location = new System.Drawing.Point(40, 75);
+            this.tbSearch.Location = new System.Drawing.Point(45, 71);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(242, 23);
             this.tbSearch.TabIndex = 20;
@@ -80,7 +80,7 @@
             // linkBack
             // 
             this.linkBack.AutoSize = true;
-            this.linkBack.Location = new System.Drawing.Point(5, 102);
+            this.linkBack.Location = new System.Drawing.Point(5, 76);
             this.linkBack.Name = "linkBack";
             this.linkBack.Size = new System.Drawing.Size(38, 12);
             this.linkBack.TabIndex = 20;
@@ -97,9 +97,9 @@
             this.lbMdList.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbMdList.FormattingEnabled = true;
             this.lbMdList.ItemHeight = 16;
-            this.lbMdList.Location = new System.Drawing.Point(12, 118);
+            this.lbMdList.Location = new System.Drawing.Point(12, 102);
             this.lbMdList.Name = "lbMdList";
-            this.lbMdList.Size = new System.Drawing.Size(287, 500);
+            this.lbMdList.Size = new System.Drawing.Size(287, 516);
             this.lbMdList.TabIndex = 25;
             this.lbMdList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbMdList_DrawItem);
             this.lbMdList.SelectedIndexChanged += new System.EventHandler(this.lbMdList_SelectedIndexChanged);
@@ -109,8 +109,8 @@
             this.tabEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabEditor.Controls.Add(this.tabText);
             this.tabEditor.Controls.Add(this.tabMd);
+            this.tabEditor.Controls.Add(this.tabText);
             this.tabEditor.Controls.Add(this.tabHTML);
             this.tabEditor.Location = new System.Drawing.Point(7, 56);
             this.tabEditor.Name = "tabEditor";
@@ -118,6 +118,26 @@
             this.tabEditor.Size = new System.Drawing.Size(614, 555);
             this.tabEditor.TabIndex = 50;
             this.tabEditor.SelectedIndexChanged += new System.EventHandler(this.tabEditor_SelectedIndexChanged);
+            // 
+            // tabMd
+            // 
+            this.tabMd.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabMd.Controls.Add(this.webMd);
+            this.tabMd.Location = new System.Drawing.Point(4, 22);
+            this.tabMd.Name = "tabMd";
+            this.tabMd.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMd.Size = new System.Drawing.Size(606, 529);
+            this.tabMd.TabIndex = 1;
+            this.tabMd.Text = "プレビュー";
+            // 
+            // webMd
+            // 
+            this.webMd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webMd.Location = new System.Drawing.Point(3, 3);
+            this.webMd.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webMd.Name = "webMd";
+            this.webMd.Size = new System.Drawing.Size(600, 523);
+            this.webMd.TabIndex = 0;
             // 
             // tabText
             // 
@@ -210,26 +230,6 @@
             this.rtbMd.Text = "";
             this.rtbMd.WordWrap = false;
             this.rtbMd.TextChanged += new System.EventHandler(this.rtbMd_TextChanged);
-            // 
-            // tabMd
-            // 
-            this.tabMd.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabMd.Controls.Add(this.webMd);
-            this.tabMd.Location = new System.Drawing.Point(4, 22);
-            this.tabMd.Name = "tabMd";
-            this.tabMd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMd.Size = new System.Drawing.Size(606, 529);
-            this.tabMd.TabIndex = 1;
-            this.tabMd.Text = "プレビュー";
-            // 
-            // webMd
-            // 
-            this.webMd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webMd.Location = new System.Drawing.Point(3, 3);
-            this.webMd.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webMd.Name = "webMd";
-            this.webMd.Size = new System.Drawing.Size(600, 523);
-            this.webMd.TabIndex = 0;
             // 
             // tabHTML
             // 
@@ -334,11 +334,12 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LocalMarkdownExplorer.Resource1.search;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 77);
+            this.pictureBox1.Location = new System.Drawing.Point(266, 74);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 16);
             this.pictureBox1.TabIndex = 56;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btnOpenDir
             // 
@@ -397,19 +398,23 @@
             // 
             // lbAssist
             // 
+            this.lbAssist.BackColor = System.Drawing.Color.Azure;
+            this.lbAssist.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbAssist.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbAssist.FormattingEnabled = true;
-            this.lbAssist.Location = new System.Drawing.Point(43, 97);
+            this.lbAssist.ItemHeight = 16;
+            this.lbAssist.Location = new System.Drawing.Point(45, 93);
             this.lbAssist.Name = "lbAssist";
-            this.lbAssist.Size = new System.Drawing.Size(285, 17);
+            this.lbAssist.Size = new System.Drawing.Size(268, 20);
             this.lbAssist.TabIndex = 54;
             this.lbAssist.Visible = false;
+            this.lbAssist.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbAssist_DrawItem);
             this.lbAssist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbAssist_KeyDown);
             this.lbAssist.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbAssist_MouseUp);
             // 
             // btnAssistClose
             // 
-            this.btnAssistClose.Location = new System.Drawing.Point(303, 98);
+            this.btnAssistClose.Location = new System.Drawing.Point(289, 93);
             this.btnAssistClose.Name = "btnAssistClose";
             this.btnAssistClose.Size = new System.Drawing.Size(24, 21);
             this.btnAssistClose.TabIndex = 60;
@@ -441,8 +446,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabEditor.ResumeLayout(false);
-            this.tabText.ResumeLayout(false);
             this.tabMd.ResumeLayout(false);
+            this.tabText.ResumeLayout(false);
             this.tabHTML.ResumeLayout(false);
             this.tabHTML.PerformLayout();
             this.groupBoxFile.ResumeLayout(false);
