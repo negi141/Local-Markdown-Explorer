@@ -17,6 +17,7 @@ namespace LocalMarkdownExplorer
 {
     public partial class Form1 : Form
     {
+        public string appTitle = "Local-Markdown-Explorer";
         string targetPath;
         public string selectedDirName = "";
         Encoding fileEncode;
@@ -442,7 +443,7 @@ namespace LocalMarkdownExplorer
         private void setTargetPath(string path)
         {
             this.targetPath = path;
-            this.Text = "LocalMarkdownExplorer  [" + cbRootDir.Text + "]";
+            this.Text = appTitle + "  [" + cbRootDir.Text + "]";
         }
         private void textAdd(string addText)
         {
@@ -674,6 +675,12 @@ namespace LocalMarkdownExplorer
             return base.ProcessDialogKey(keyData);
         }
         #endregion
+        private void btnCredit_Click(object sender, EventArgs e)
+        {
+            FormInfo f = new FormInfo(this);
+            f.ShowDialog();
+            f.Dispose();
+        }
 
     }
 }

@@ -48,6 +48,7 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lbCautionMessge = new System.Windows.Forms.Label();
             this.groupBoxFile = new System.Windows.Forms.GroupBox();
+            this.btnCredit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
@@ -295,6 +296,16 @@
             this.groupBoxFile.TabStop = false;
             this.groupBoxFile.Text = "ファイル";
             // 
+            // btnCredit
+            // 
+            this.btnCredit.Image = global::LocalMarkdownExplorer.Resource1.info;
+            this.btnCredit.Location = new System.Drawing.Point(266, 37);
+            this.btnCredit.Name = "btnCredit";
+            this.btnCredit.Size = new System.Drawing.Size(31, 27);
+            this.btnCredit.TabIndex = 61;
+            this.btnCredit.UseVisualStyleBackColor = true;
+            this.btnCredit.Click += new System.EventHandler(this.btnCredit_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Image = global::LocalMarkdownExplorer.Resource1.delete16;
@@ -428,6 +439,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 631);
+            this.Controls.Add(this.btnCredit);
             this.Controls.Add(this.btnAssistClose);
             this.Controls.Add(this.btnEditRootDir);
             this.Controls.Add(this.btnAddRootDir);
@@ -490,6 +502,7 @@
         private System.Windows.Forms.Button btnEditRootDir;
         private System.Windows.Forms.ListBox lbAssist;
         private System.Windows.Forms.Button btnAssistClose;
+        private System.Windows.Forms.Button btnCredit;
     }
 }
 
