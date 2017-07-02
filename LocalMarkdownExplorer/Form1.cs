@@ -677,9 +677,7 @@ namespace LocalMarkdownExplorer
         #endregion
         private void btnCredit_Click(object sender, EventArgs e)
         {
-            FormInfo f = new FormInfo(this);
-            f.ShowDialog();
-            f.Dispose();
+            MessageBox.Show(appTitle + "　(version 1.1)\r\n\r\n　　　Takuto Negishi", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }
