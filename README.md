@@ -8,7 +8,7 @@ Local Markdown Explorerは、ローカルにあるMarkdownファイル用のエ�
 * ファイルの全文検索
 
 ## 利用
-[LocalMarkdownExplorer.zip](https://github.com/negi141/LocalMarkdownExplorer/raw/master/bin/LocalMarkdownExplorer.zip)
+[LocalMarkdownExplorer.zip](https://github.com/negi141/Local-Markdown-Explorer/releases)
 
 ## ソースコード
 Visual Studio 2010 (C#)
